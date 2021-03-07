@@ -4,8 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
     <title>Alternate Search and Layout</title>
+    <!-- Chart.js cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
   </head>
 
   <body class="bg-secondary">
@@ -131,6 +134,9 @@
           </div>
         </div>
       </div>
+      <div>
+        <canvas id="myChart" width="50%" height="10%"></canvas>
+      </div>
     </div>
     <!-- Needed for Bootstrap - Bundle includes Popper -->
     <script
@@ -140,6 +146,9 @@
     ></script>
     <!-- Bootstrap 5 no longer uses jquery - This is needed for DOM manipulation -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="test.js"></script>
+    <!-- Alternate api and layout  -->
+    <script src="../js/jamie/nba_alternate.js"></script>
+    <!-- Chart.js test -->
+    <script src="../js/jamie/chartTest.js"></script>
   </body>
 </html>
