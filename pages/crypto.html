@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+      integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+      crossorigin="anonymous"
+    ></script>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/bootstrap.css" />
-    <!-- <link rel="stylesheet" href="../css/carousel.css" /> -->
-    <title>Cryptocurrency<title>
+    <title>Crypto Currency</title>
     <nav
     class="navbar navbar-expand-sm navbar-dark bg-dark"
     aria-label="Third navbar example"
@@ -47,7 +52,7 @@
                 >
               </li>
               <li><a class="dropdown-item" href="../pages/iss.html">Where is the ISS</a></li>
-              <li><a class="dropdown-item" href="../pages/crypto.html">Crypto something</a></li>
+              <li><a class="dropdown-item" href="../pages/crypto.html">Crypto Currency</a></li>
               <li><a class="dropdown-item" href="../pages/spotify.html">Spotify</a></li>
               <li><a class="dropdown-item" href="../pages/weather.html">The Weather</a></li>
             </ul>
@@ -65,13 +70,13 @@
               <li><a class="dropdown-item" href="../pages/covidTut.html">Covid-19 Statistics</a></li>
               <li><a class="dropdown-item" href="../pages/nbaTut.html">NBA Analytics</a></li>
               <li><a class="dropdown-item" href="../pages/ISSTut.html">Where is the ISS</a></li>
-              <li><a class="dropdown-item" href="../pages/cryptoTut.html">Crypto something</a></li>
+              <li><a class="dropdown-item" href="../pages/cryptoTut.html">Crypto Currency</a></li>
               <li><a class="dropdown-item" href="../pages/spotifyTut.html">Spotify</a></li>
               <li><a class="dropdown-item" href="../pages/weatherTut.html">The Weather</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">The Team</a>
+            <a class="nav-link" href="../pages/theTeam.html">The Team</a>
           </li>
         </ul>
         <form>
@@ -87,19 +92,41 @@
   </nav>
   </head>
   <body>
-
-
-
-
+    <canvas id="lineChart" height="300" width="300"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../js/kit/crypto.js"></script>
     <footer>
-        <div class="container text-center">
-          <div class="footer fixed-bottom">
-            <p>© 2021 IP3 Dream Team</p>
-          </div>
+      <div class="container text-center">
+        <div class="footer fixed-bottom">
+          <p>© 2021 IP3 Dream Team</p>
         </div>
-        </footer>
-    
-        <script src="../js/bootstrap.bundle.js"></script>
-      </body>
-    </html>
-    
+      </div>
+      </footer>
+  
+      <script src="../js/bootstrap.bundle.js"></script>
+  </body>
+
+  <script>
+    $.ajax("https://api.coinlore.net/api/ticker/?id=90").done(function (data) {
+      console.log(data);
+    });
+  </script>
+  <script>
+    $.ajax("https://api.coinlore.net/api/ticker/?id=80").done(function (data) {
+      console.log(data);
+    });
+  </script>
+  <script
+    type="text/javascript"
+    src="https://widget.coinlore.com/widgets/coinlore-list-widget.js"
+  ></script>
+  <div
+    class="coinlore-list-widget"
+    data-mcurrency="GBP"
+    data-top="10"
+    data-cwidth="100%"
+    data-bcolor="#fff"
+    data-coincolor="#428bca"
+    data-pricecolor="#4c4c4c"
+  ></div>
+</html>
