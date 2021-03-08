@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $("#countryList").change(function () {
+      clearData();
       var country = $("#countryList option:selected").val();
       console.log(country);
   
@@ -60,8 +61,34 @@ $(document).ready(function () {
   }
 
   function displayData(data) {
-    document.getElementById('ConfirmedCases').innerHTML += '<p>' + data.confirmed + '</p>';
-    document.getElementById('RecoveryCases').innerHTML += '<p>' + data.recovered + '</p>';
-    document.getElementById('Deaths').innerHTML += '<p>' + data.deaths + '</p>';
-    document.getElementById('lastUpdated').innerHTML += '<p>' + data.updated + '</p>';
+    if(data.recovered != 0)
+    {
+      document.getElementById('ConfirmedCases').innerHTML += '<p>' + data.confirmed + '</p>';
+      document.getElementById('RecoveryCases').innerHTML += '<p>' + data.recovered + '</p>';
+      document.getElementById('Deaths').innerHTML += '<p>' + data.deaths + '</p>';
+      document.getElementById('lastUpdated').innerHTML += '<p>' + data.updated + '</p>';
+    } else {
+      document.getElementById('ConfirmedCases').innerHTML += '<p>' + data.confirmed + '</p>';
+      document.getElementById('RecoveryCases').innerHTML += '<p>' + 'Recovery Data Not Available' + '</p>';
+      document.getElementById('Deaths').innerHTML += '<p>' + data.deaths + '</p>';
+      document.getElementById('lastUpdated').innerHTML += '<p>' + data.updated + '</p>';
+    }
+
+  }
+
+  function clearData() {
+    //Clearing chart
+    var doughnutContent = document.getElementById('doughnut-chart');
+    doughnutContent.innerHTML = '&nbsp;';
+
+    //Clearing <p> data
+    var confirmedContent = document.getElementById('ConfirmedCases');
+    confirmedContent.innerHTML = 'Confirmed Cases';
+    var recContent = document.getElementById('RecoveryCases');
+    recContent.innerHTML = 'Recovery Cases';
+    var deathContent = document.getElementById('Deaths');
+    deathContent.innerHTML = 'Deaths';
+    var updatedContent = document.getElementById('lastUpdated');
+    updatedContent.innerHTML = 'Last Updated';
+
   }

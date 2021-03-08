@@ -96,11 +96,11 @@
 
     <div class="container">
       <div class="row">
-        <div class="col">
+        <div class="col sm-6">
           <!-- Chart -->
           <canvas id="doughnut-chart" width="300" height="300"></canvas>
         </div>
-        <div class="col">
+        <div class="col sm-8">
           <!-- Create a drop down for each country -->
           <select id="countryList">
           <option>Please select a country...</option>
@@ -108,10 +108,10 @@
           </select>
 
           <!-- Create a small list to show the covid data -->
-          <p>Confirmed Cases:</p> <p id='ConfirmedCases'> </p>
-          <p>Recovery Cases:</p> <p id='RecoveryCases'> </p>
-          <p>Deaths:</p> <p id='Deaths'> </p>
-          <p>Last Updated:</p> <p id='lastUpdated'> </p>
+          <p id='ConfirmedCases'> </p>
+          <p id='RecoveryCases'> </p>
+          <p id='Deaths'> </p>
+          <p id='lastUpdated'> </p>
         </div>
       </div>
 
@@ -121,8 +121,6 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
       <script type="text/javascript" src="../js/charley/countryDS.js"></script>
       <script type="text/javascript" src="../js/charley/covidDS.js"></script>
-      <script type="text/javascript" src-="../js/charley/covidStatsGraph.js"></script>
-
 
   <footer>
     <div class="container text-center">
