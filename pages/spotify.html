@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <!-- Start of Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+    <div class="container-fluid"> 
+        <!-- Navigation Title (Home) -->
+        <a class="navbar-brand" href="../pages/index.html">IP3 Dream Team</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExample03">
+            <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                <!-- Navigation Button (Home) -->
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                </li>
+                <!-- Navigation Drop Down (Visualisations) -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Visualisations</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                            <li><a class="dropdown-item" href="../pages/covid.html">Covid-19 Countries Statistics</a></li>
+                            <li><a class="dropdown-item" href="../pages/nba.html">NBA Analytics</a></li>
+                            <li><a class="dropdown-item" href="../pages/iss.html">Where is the ISS</a></li>
+                            <li><a class="dropdown-item" href="../pages/crypto.html">Crypto something</a></li>
+                            <li><a class="dropdown-item" href="../pages/spotify.html">Spotify User Information</a></li>
+                            <li><a class="dropdown-item" href="../pages/weather.html">The Weather</a></li>
+                        </ul>
+                </li>
+                <!-- Navigation Drop Down (Tutorials) -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Tutorials</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                            <li><a class="dropdown-item" href="../pages/covidTut.html">Covid-19 Statistics</a></li>
+                            <li><a class="dropdown-item" href="../pages/nbaTut.html">NBA Analytics</a></li>
+                            <li><a class="dropdown-item" href="../pages/ISSTut.html">Where is the ISS</a></li>
+                            <li><a class="dropdown-item" href="../pages/cryptoTut.html">Crypto something</a></li>
+                            <li><a class="dropdown-item" href="../pages/spotifyTut.html">Spotify User Information</a></li>
+                            <li><a class="dropdown-item" href="../pages/weatherTut.html">The Weather</a></li>
+                        </ul>
+                </li>
+            <!-- Navigation Button (Team) -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">The Team</a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+    <!-- Start of Main Page -->
+    <!-- Temporary White Space -->
+    </br>
+    </br>
+    
+    <div class="container">
+        <div id="login">
+          <h1>Gaining Authorization</h1>
+          <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+        </div>
+        <div id="loggedin">
+          <div id="user-profile">
+          </div>
+          <div id="oauth">
+          </div>
+          <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
+        </div>
+      </div>
+  
+      <script id="user-profile-template" type="text/x-handlebars-template">
+        <h1>Logged in as {{display_name}}</h1>
+        <div class="media">
+          <div class="pull-left">
+            <img class="media-object" width="150" src="{{images.0.url}}" />
+          </div>
+          <div class="media-body">
+            <dl class="dl-horizontal">
+              <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
+              <dt>Id</dt><dd>{{id}}</dd>
+              <dt>Email</dt><dd>{{email}}</dd>
+              <dt>Spotify URI</dt><dd><a href="{{external_urls.spotify}}">{{external_urls.spotify}}</a></dd>
+              <dt>Link</dt><dd><a href="{{href}}">{{href}}</a></dd>
+              <dt>Profile Image</dt><dd class="clearfix"><a href="{{images.0.url}}">{{images.0.url}}</a></dd>
+              <dt>Country</dt><dd>{{country}}</dd>
+            </dl>
+          </div>
+        </div>
+      </script>
+  
+      <script id="oauth-template" type="text/x-handlebars-template">
+        <h2>oAuth info</h2>
+        <dl class="dl-horizontal">
+          <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
+          <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}</dd>
+        </dl>
+      </script>
+  
+      <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+      <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+      <script>
+        (function() {
+  
+          /**
+           * Obtains parameters from the hash of the URL
+           * @return Object
+           */
+          function getHashParams() {
+            var hashParams = {};
+            var e, r = /([^&;=]+)=?([^&;]*)/g,
+                q = window.location.hash.substring(1);
+            while ( e = r.exec(q)) {
+               hashParams[e[1]] = decodeURIComponent(e[2]);
+            }
+            return hashParams;
+          }
+  
+          var userProfileSource = document.getElementById('user-profile-template').innerHTML,
+              userProfileTemplate = Handlebars.compile(userProfileSource),
+              userProfilePlaceholder = document.getElementById('user-profile');
+  
+          var oauthSource = document.getElementById('oauth-template').innerHTML,
+              oauthTemplate = Handlebars.compile(oauthSource),
+              oauthPlaceholder = document.getElementById('oauth');
+  
+          var params = getHashParams();
+  
+          var access_token = params.access_token,
+              refresh_token = params.refresh_token,
+              error = params.error;
+  
+          if (error) {
+            alert('There was an error during the authentication');
+          } else {
+            if (access_token) {
+              // render oauth info
+              oauthPlaceholder.innerHTML = oauthTemplate({
+                access_token: access_token,
+                refresh_token: refresh_token
+              });
+  
+              $.ajax({
+                  url: 'https://api.spotify.com/v1/me',
+                  headers: {
+                    'Authorization': 'Bearer ' + access_token
+                  },
+                  success: function(response) {
+                    userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+  
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+              });
+            } else {
+                // render initial screen
+                $('#login').show();
+                $('#loggedin').hide();
+            }
+  
+            document.getElementById('obtain-new-token').addEventListener('click', function() {
+              $.ajax({
+                url: '/refresh_token',
+                data: {
+                  'refresh_token': refresh_token
+                }
+              }).done(function(data) {
+                access_token = data.access_token;
+                oauthPlaceholder.innerHTML = oauthTemplate({
+                  access_token: access_token,
+                  refresh_token: refresh_token
+                });
+              });
+            }, false);
+          }
+        })();
+      </script>
+
+    <!--Bootstrap Scripts-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <!--Footer-->
+    <footer>
+        <div class="container text-center">
+            <div class="footer fixed-bottom">
+            <p>© 2021 IP3 Dream Team</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/bootstrap.bundle.js"></script>
+  </body>
+</html>
