@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   var ctx = document.getElementById("doughnut-chart").getContext("2d");
   var myDoughnutChart = new Chart(ctx, {
     type: 'doughnut',
@@ -18,7 +19,6 @@ $(document).ready(function () {
           ],
           borderWidth: 1
         }],
-    
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: [
             'Red',
