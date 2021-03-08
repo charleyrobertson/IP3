@@ -17,6 +17,7 @@ $(document).ready(function () {
 
         
           makeChart(data);
+          displayData(data);
       })
   
     })
@@ -56,4 +57,11 @@ $(document).ready(function () {
       }
     });
   
+  }
+
+  function displayData(data) {
+    document.getElementById('ConfirmedCases').innerHTML += '<p>' + data.confirmed + '</p>';
+    document.getElementById('RecoveryCases').innerHTML += '<p>' + data.recovered + '</p>';
+    document.getElementById('Deaths').innerHTML += '<p>' + data.deaths + '</p>';
+    document.getElementById('lastUpdated').innerHTML += '<p>' + data.updated + '</p>';
   }

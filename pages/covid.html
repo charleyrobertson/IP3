@@ -94,21 +94,28 @@
     </br>
     </br>
 
-    <!-- Create a drop down for each country -->
-    <select id="countryList">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <!-- Chart -->
+          <canvas id="doughnut-chart" width="300" height="300"></canvas>
+        </div>
+        <div class="col">
+          <!-- Create a drop down for each country -->
+          <select id="countryList">
+          <option>Please select a country...</option>
 
+          </select>
 
-    </select>
+          <!-- Create a small list to show the covid data -->
+          <p>Confirmed Cases:</p> <p id='ConfirmedCases'> </p>
+          <p>Recovery Cases:</p> <p id='RecoveryCases'> </p>
+          <p>Deaths:</p> <p id='Deaths'> </p>
+          <p>Last Updated:</p> <p id='lastUpdated'> </p>
+        </div>
+      </div>
 
-    <!-- Create a small list to show the covid data -->
-    <h1>Confirmed Cases:</h1> <p id='ConfirmedCases'> </p>
-    <h1>Recovery Cases:</h1> <p id='RecoveryCases'> </p>
-    <h1>Deaths:</h1> <p id='Deaths'> </p>
-    <h1>Last Updated:</h1> <p id='lastUpdated'> </p>
-
-    <!-- Chart -->
-    <canvas id="doughnut-chart" width="800" height="450"></canvas>
-
+  
     <!--Scripts-->
     <!--Bootstrap Scripts-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
