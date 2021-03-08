@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/bootstrap.css" />
-    <!-- <link rel="stylesheet" href="../css/carousel.css" /> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <nav
     class="navbar navbar-expand-sm navbar-dark bg-dark"
     aria-label="Third navbar example"
@@ -106,12 +106,15 @@
     <h1>Deaths:</h1> <p id='Deaths'> </p>
     <h1>Last Updated:</h1> <p id='lastUpdated'> </p>
 
+    <!-- Chart -->
+    <canvas id="myDoughnutChart" class="chart"></canvas>
+
     <!--Scripts-->
     <!--Bootstrap Scripts-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
       <script type="text/javascript" src="../js/charley/countryDS.js"></script>
       <script type="text/javascript" src="../js/charley/covidDS.js"></script>
-
+      <script src-="../js/charley/covidStatsGraph.js"></script>
 
 
   <footer>
