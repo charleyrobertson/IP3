@@ -44,6 +44,10 @@
   }
 }
 
+.circular--square {
+  border-radius: 20%;
+}
+
 body {
   margin: 0;
   font-family: var(--bs-font-sans-serif);
