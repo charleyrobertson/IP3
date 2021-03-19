@@ -1,27 +1,5 @@
 /* STYLES FOR THE TEAM PAGE */
 
-
-.card-header {
-    text-align: center;
-}
-
-.card-title {
-    text-align: center;
-}
-
-.card-footer {
-    text-align: center;
-}
-
-#contactDetails {
-    text-align: center;
-    text-decoration-style: solid;
-}
-
-/* Test for mock up page*/
-
-
-/* Center align the text within the three columns below the carousel */
 .authors .col-lg-4 {
     margin-bottom: 1.5rem;
     text-align: center;
