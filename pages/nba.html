@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/nba.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
     <title>IP3 Dream Team - NBA Analytics Visualisation</title>
   </head>
 
@@ -44,36 +49,16 @@
                 >Visualisations</a
               >
               <ul class="dropdown-menu" aria-labelledby="dropdown03">
-                <li>
-                  <a class="dropdown-item" href="../pages/covid.html"
-                    >Covid 19</a
-                  >
-                </li>
+                <li><a class="dropdown-item" href="../pages/covid.html">Covid-19 Countries Statistics</a></li>
                 <li>
                   <a class="dropdown-item" href="../pages/nba.html"
                     >NBA Analytics</a
                   >
                 </li>
-                <li>
-                  <a class="dropdown-item" href="../pages/iss.html"
-                    >Where is the ISS</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="../pages/crypto.html"
-                    >Crypto something</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="../pages/spotify.html"
-                    >Spotify</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="../pages/weather.html"
-                    >The Weather</a
-                  >
-                </li>
+                <li><a class="dropdown-item" href="../pages/iss.html">Where is the ISS</a></li>
+                <li><a class="dropdown-item" href="../pages/temperature.html">Global Warming?</a></li>
+                <li><a class="dropdown-item" href="../pages/words.html">Words</a></li>
+                <li><a class="dropdown-item" href="../pages/weather.html">The Weather</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -116,9 +101,19 @@
         <div class="row">
           <h1>NBA Analytics Visualisation</h1>
           <div class="col">
-            <label for="teamList" class="form-label">Select Team</label>
-            <select name="teamList" id="teamList" class="form-control"></select>
+            <label for="playerSearch" class="form-label">Search Players</label>
+            <input
+              class="form-control"
+              list="playerSearchOptions"
+              id="playerSearch"
+              name="playerSearch"
+              placeholder="Type to search..."
+            />
+            <datalist id="playerSearchOptions">
+              <option value="Lebron James"></option>
+            </datalist>
           </div>
+
           <div class="col">
             <label for="seasonList" class="form-label">Select Season</label>
             <select
@@ -127,13 +122,14 @@
               class="form-control"
             ></select>
           </div>
+
+
+        </div>
+        <div id="seasonHeader" class="text-center"></div>
+        <canvas id="seasonAverages"></canvas>
+        <div class="row">
           <div class="col">
-            <label for="playerList" class="form-label">Select Player</label>
-            <select
-              name="playerList"
-              id="playerList"
-              class="form-control"
-            ></select>
+            <div id="shootingPercentage"></div>
           </div>
         </div>
       </div>
