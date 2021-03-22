@@ -13,7 +13,7 @@ $(document).ready(function () {
                 "url": url,
                 "method": "GET",
                 "headers": {
-                    "x-rapidapi-key": "???",
+                    "x-rapidapi-key": "3802d49eebmsh116ee2705f1741ep15ef6ejsn83b8aefe81f7",
                     "x-rapidapi-host": "wordsapiv1.p.rapidapi.com"
                 }
             };
@@ -34,7 +34,7 @@ $(document).ready(function () {
                     const iterationDef = {
                         definition: responseData.results[i].definition
                     }
-                    //console.log(iterationDef);
+                    console.log(iterationDef);
 
                     var definition = iterationDef.toString();
                     const div = document.createElement('div');
@@ -50,9 +50,9 @@ $(document).ready(function () {
                         const specificSyn = {
                             synonyms: responseData.results[i].synonyms[p]
                         }
-                        //console.log(specificSyn);
+                        console.log(specificSyn);
                     }
-                    //console.log("-----------");
+                    console.log("-----------");
 
                     
                 }
