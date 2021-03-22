@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/bootstrap.css" />
+  <link rel="stylesheet" href="../css/authors.css" />
+  <title>Words/Synonyms</title>
+
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../pages/index.html">IP3 Dream Team</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExample03">
+        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+          <li class="nav-item"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+          <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Visualisations</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <li><a class="dropdown-item" href="../pages/covid.html">Covid-19 Countries Statistics</a></li>
+              <li><a class="dropdown-item" href="../pages/nba.html">NBA Analytics</a></li>
+              <li><a class="dropdown-item" href="../pages/iss.html">Where is the ISS</a></li>
+              <li><a class="dropdown-item" href="../pages/temperature.html">Global Temperatures</a></li>
+              <li><a class="dropdown-item" href="../pages/words.html"><b>Words!</b></a></li>
+              <li><a class="dropdown-item" href="../pages/weather.html">The Weather</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Tutorials</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <li><a class="dropdown-item" href="../pages/covidTut.html">Covid-19 Statistics</a></li>
+              <li><a class="dropdown-item" href="../pages/nbaTut.html">NBA Analytics</a></li>
+              <li><a class="dropdown-item" href="../pages/ISSTut.html">Where is the ISS</a></li>
+              <li><a class="dropdown-item" href="../pages/temperatureTut.html">Global Temperatures</a></li>
+              <li><a class="dropdown-item" href="../pages/wordsTut.html">Words!</a></li>
+              <li><a class="dropdown-item" href="../pages/weatherTut.html">The Weather</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="TheTeam.html">The Team</a></li>
+        </ul>
+        <form><input class="form-control" type="text" placeholder="Search" aria-label="Search"/></form>
+      </div>
+    </div>
+  </nav>
+</head>
+
+<body>
+  <header>
+    <h1 style="text-align: center; padding-top: 10px;" id="titleHead">Words & Synonyms Visualisation</h1>
+  </header>
+
+  <div class="container authors">
+    <div class="row">
+      <div style="text-align: center; padding-right: 50px; padding-left: 50px;">
+        <h5>This page allows you to search for a word and look at the pretty synonyms!</h5>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce consequat tortor in est vestibulum, a lobortis lorem pulvinar. 
+          Proin elementum placerat magna, et molestie felis varius sit amet. Sed faucibus sagittis auctor. 
+          Sed vestibulum elementum felis, id euismod tellus tempus vitae. 
+          Aliquam nec lectus non purus egestas ultricies eget in sem. 
+          Phasellus id pellentesque dui. 
+        </p>
+        <p>
+          <em>
+            <a href='wordsTut.html' href="#">Click here to view the tutorial page for this API:</a>
+          </em>
+        </p>
+        <h5>Significant Word:</h6>
+        <form style="padding-top: 5px;">
+          <input type="text" class="form-control" id="significantWord" name="significantWord" placeholder="Type your word here..." required style="text-align: center;" >
+        </form>
+        <div class="form-group" style="padding-top: 10px; padding-bottom: 10px;">
+          <input type="submit" value="Submit word!" class="btn btn-secondary" id= 'submitButton'>
+        </div>
+        <div style="text-align: center; padding-right: 50px; padding-left: 50px;"><p id= "apiReturn"></p></div>
+        <div style="text-align: center; padding-right: 50px; padding-left: 50px;"><p id= "apiDef"></p></div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<footer>
+  <div class="container text-center">
+    <div class="footer fixed-bottom">
+      <p>© 2021 IP3 Dream Team</p>
+    </div>
+  </div>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../js/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="../js/john/words.js"></script> 
+</html>
