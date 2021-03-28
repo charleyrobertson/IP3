@@ -1,22 +1,9 @@
-$(document).ready(function () {
-  var seasonList = document.getElementById("seasonList");
-  seasonList.options[0] = new Option("Select a season...", "0");
-  seasonList.options[1] = new Option("2015-16", "");
-  seasonList.options[2] = new Option("2016-17", "");
-  seasonList.options[3] = new Option("2017-18", "");
-  seasonList.options[4] = new Option("2018-19", "");
-  seasonList.options[5] = new Option("2019-20", "");
-  seasonList.options[6] = new Option("2020-21", "");
+// $(document).ready(function () {
+//   playerSearch();
+// });
 
-  displaySeasonHeader();
-  getLebronJames();
-  playerSearch();
-});
-
-// TODO:
-// Search for a player and append results to the datalist
-// when value is selected, data will be sent to charting functions
-// when value is selected, the datalist should clear all the options and values
+//TODO: add keypress event for clicking on option and getting that players stuff
+// Getting a player to get stats for
 function playerSearch() {
   $("#playerSearch").keypress(function () {
     if ($(this).val().length > 4) {
@@ -41,6 +28,84 @@ function playerSearch() {
     }
   });
 }
+
+function playerSearch2(search) {
+  // Replace spaces with "_"
+  search = search.replace(/ /g, "_");
+  console.log(search);
+  $.ajax("https://www.balldontlie.io/api/v1/players?search=" + search).done(
+    function (data) {
+      if (data.data.length > 1) {
+        var list = document.getElementById("playerSearchOptions2");
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement("option");
+          option.value = data.data[i].first_name + " " + data.data[i].last_name;
+          list.appendChild(option);
+        }
+      } else {
+        console.log(data);
+        getFirstSeason(data)
+      }
+    }
+  );
+}
+
+// Getting the first season a player played in
+function getFirstSeason(data) {
+  var id = data.data[0].id;
+  $.ajax("https://www.balldontlie.io/api/v1/stats?player_ids[]=" + id).done(
+    function (data) {
+      var firstSeason = parseInt(data.data[0].game.season, 10);
+      console.log("The players first season: ", firstSeason);
+      // calcCareerAverage(firstSeason);
+    }
+  );
+}
+
+$(document).ready(function () {
+  var seasonList = document.getElementById("seasonList");
+  seasonList.options[0] = new Option("Select a season...", "0");
+  seasonList.options[1] = new Option("2015-16", "");
+  seasonList.options[2] = new Option("2016-17", "");
+  seasonList.options[3] = new Option("2017-18", "");
+  seasonList.options[4] = new Option("2018-19", "");
+  seasonList.options[5] = new Option("2019-20", "");
+  seasonList.options[6] = new Option("2020-21", "");
+
+  // Some default values for the player search datalist
+
+  // Search on click on button
+  $("#playerSearchButton").click(function () {
+    var search = $("#playerSearch2").val();
+    playerSearch2(search);
+  });
+
+  // Search on enter key press
+  // $("#playerSearch2").keypress(function (e) {
+  //   if (e.which == 13) {
+  //     // Enter key pressed
+  //     $("#playerSearchButton").click(); // Trigger search button click event
+  //   }
+  // });
+
+  // Search on datalist select and on enter press apparently
+  $("#playerSearch2").on("change", function () {
+    var value = this.value;
+    $("#playerSearchButton").click(); // Trigger search button click event
+  });
+
+  // Clear button for player search
+  // TODO
+
+  displaySeasonHeader();
+  getLebronJames();
+  playerSearch();
+});
+
+// TODO:
+// Search for a player and append results to the datalist
+// when value is selected, data will be sent to charting functions
+// when value is selected, the datalist should clear all the options and values
 
 // Will display a header on season selection
 function displaySeasonHeader() {
@@ -80,50 +145,40 @@ function getLebronJames() {
   });
 }
 
-// Getting the first season a player played in
-function getFirstSeason() {
-  $.ajax("https://www.balldontlie.io/api/v1/stats?player_ids[]=237").done(
-    function (data) {
-      var firstSeason = parseInt(data.data[0].game.season, 10);
-      console.log("The players first season: ", firstSeason);
-      calcCareerAverage(firstSeason);
-    }
-  );
-}
-
 // Calculating a players career averages in chosen metrics
-async function calcCareerAverage(firstSeason) {
-  var careerStats = {
-    points: 0.0,
-    assists: 0.0,
-    rebounds: 0.0,
-    blocks: 0.0,
-    steals: 0.0,
-    turnOver: 0.0,
-  };
-  var counter = 0;
+// function calcCareerAverage(firstSeason) {
+//   var careerStats = {
+//     points: 0.0,
+//     assists: 0.0,
+//     rebounds: 0.0,
+//     blocks: 0.0,
+//     steals: 0.0,
+//     turnOver: 0.0,
+//   };
+//   var counter = 0;
 
-  for (i = firstSeason; i < 2020; i++) {
-    $.ajax({
-      url:
-        "https://www.balldontlie.io/api/v1/season_averages?season=" +
-        i +
-        "&player_ids[]=237",
-      // async: false,
-    }).done(function (data) {
-      careerStats.points += data.data[0].pts;
-      careerStats.assists += data.data[0].ast;
-      careerStats.rebounds += data.data[0].reb;
-      careerStats.blocks += data.data[0].blk;
-      careerStats.steals += data.data[0].stl;
-      careerStats.turnOver += data.data[0].turnover;
-      console.log(careerStats.points);
-    });
+//   for (i = firstSeason; i < 2020; i++) {
+//     $.ajax({
+//       url:
+//         "https://www.balldontlie.io/api/v1/season_averages?season=" +
+//         i +
+//         "&player_ids[]=237",
+//       // async: false,
+//     }).then(function (data) {
+//       careerStats.points += data.data[0].pts;
+//       careerStats.assists += data.data[0].ast;
+//       careerStats.rebounds += data.data[0].reb;
+//       careerStats.blocks += data.data[0].blk;
+//       careerStats.steals += data.data[0].stl;
+//       careerStats.turnOver += data.data[0].turnover;
+//       console.log("Career stats inside ajax call: ", careerStats);
+//     });
 
-    counter++;
-    console.log(counter);
-  }
-}
+//     counter++;
+//   }
+//   console.log("Counter: ", counter);
+//   (console.log("Career stats outside of ajax call: ", careerStats));
+// }
 
 function consoleLogActuallyRuinedMyEvening(careerStats) {
   console.log(careerStats);

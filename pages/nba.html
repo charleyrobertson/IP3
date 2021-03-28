@@ -49,16 +49,34 @@
                 >Visualisations</a
               >
               <ul class="dropdown-menu" aria-labelledby="dropdown03">
-                <li><a class="dropdown-item" href="../pages/covid.html">Covid-19 Countries Statistics</a></li>
+                <li>
+                  <a class="dropdown-item" href="../pages/covid.html"
+                    >Covid-19 Countries Statistics</a
+                  >
+                </li>
                 <li>
                   <a class="dropdown-item" href="../pages/nba.html"
                     >NBA Analytics</a
                   >
                 </li>
-                <li><a class="dropdown-item" href="../pages/iss.html">Where is the ISS</a></li>
-                <li><a class="dropdown-item" href="../pages/temperature.html">Global Warming?</a></li>
-                <li><a class="dropdown-item" href="../pages/words.html">Words</a></li>
-                <li><a class="dropdown-item" href="../pages/weather.html">The Weather</a></li>
+                <li>
+                  <a class="dropdown-item" href="../pages/iss.html"
+                    >Where is the ISS</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../pages/temperature.html"
+                    >Global Warming?</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../pages/words.html">Words</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../pages/weather.html"
+                    >The Weather</a
+                  >
+                </li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -122,8 +140,29 @@
               class="form-control"
             ></select>
           </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="playerSearch2" class="form-label">Search Players 2! Redux</label>
+            <div class="input-group">
+              <input
+              class="form-control"
+              list="playerSearchOptions2"
+              id="playerSearch2"
+              name="playerSearch2"
+              placeholder="Type to search..."
+            />
+            <button class="btn btn-outline-success" type="button" id="playerSearchButton">Search</button>
+            <button class="btn btn-outline-warning" type="button" id="playerClearButton">Clear</button>
+            <datalist id="playerSearchOptions2">
+              <option value="Lebron James"></option>
+              <option value="James Harden"></option>
+              <option value="Stephen Curry"></option>
+            </datalist>
+            </div>
 
 
+          </div>
         </div>
         <div id="seasonHeader" class="text-center"></div>
         <canvas id="seasonAverages"></canvas>
