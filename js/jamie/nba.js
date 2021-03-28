@@ -1,3 +1,9 @@
+// Globals
+var currentPlayer = null; // Currently selected player, used for multiple functions
+var currentSeason = null; // Currently selected season, filterd to not include the default
+var ctx = null; // Used for chart
+var chart = null; // Used for chart
+
 $(document).ready(function () {
   // Search on click on button
   $("#playerSearchButton").click(function () {
@@ -22,6 +28,7 @@ $(document).ready(function () {
   // Clear button for player search
   // TODO
 
+  // Display season header
   $("#seasonList").change(function () {
     var season = $("#seasonList option:selected").text();
     var h1 = document.createElement("h1");
@@ -30,13 +37,11 @@ $(document).ready(function () {
     if (season !== "Select a season...") {
       $("#seasonHeader").empty();
       div.append(h1);
+      getSeasonAverages(currentPlayer);
     }
+    // Get data and call charting function
   });
-  // displaySeasonHeader();
-  // getLebronJames();
-  // playerSearch();
 });
-
 
 function playerSearch(search) {
   // Replace spaces with "_"
@@ -52,7 +57,8 @@ function playerSearch(search) {
           list.appendChild(option);
         }
       } else {
-        console.log(data);
+        currentPlayer = data;
+        console.log("currentPlayer:", currentPlayer);
         getFirstSeason(data);
       }
     }
@@ -75,7 +81,7 @@ function getFirstSeason(data) {
 
 function fillSeasonSelect(firstSeason) {
   var seasonList = document.getElementById("seasonList");
-  seasonList.options[0] = new Option("Select a season...")
+  seasonList.options[0] = new Option("Select a season...");
   var count = 0;
   for (i = firstSeason; i < 2021; i++) {
     seasonList.options[count + 1] = new Option(i + "-" + (i + 1), i);
@@ -83,10 +89,23 @@ function fillSeasonSelect(firstSeason) {
   }
 }
 
-// TODO:
-// Search for a player and append results to the datalist
-// when value is selected, data will be sent to charting functions
-// when value is selected, the datalist should clear all the options and values
+function getSeasonAverages(currentPlayer) {
+  var season = $("#seasonList option:selected").text();
+  var id = currentPlayer.data[0].id;
+  console.log(season, id);
+  if (season !== "Select a season...") {
+    season = season.substring(0, 4);
+    $.ajax(
+      "https://www.balldontlie.io/api/v1/season_averages?season=" +
+        season +
+        "&player_ids[]=" +
+        id
+    ).done(function (data) {
+      console.log("Players season averages: ", data);
+      mapStatsToChart(data);
+    });
+  }
+}
 
 // A hardcoded function for testing
 // Will be used for multiple players and charts/tables
@@ -110,49 +129,6 @@ function getLebronJames() {
     }
   });
 }
-
-// Calculating a players career averages in chosen metrics
-// function calcCareerAverage(firstSeason) {
-//   var careerStats = {
-//     points: 0.0,
-//     assists: 0.0,
-//     rebounds: 0.0,
-//     blocks: 0.0,
-//     steals: 0.0,
-//     turnOver: 0.0,
-//   };
-//   var counter = 0;
-
-//   for (i = firstSeason; i < 2020; i++) {
-//     $.ajax({
-//       url:
-//         "https://www.balldontlie.io/api/v1/season_averages?season=" +
-//         i +
-//         "&player_ids[]=237",
-//       // async: false,
-//     }).then(function (data) {
-//       careerStats.points += data.data[0].pts;
-//       careerStats.assists += data.data[0].ast;
-//       careerStats.rebounds += data.data[0].reb;
-//       careerStats.blocks += data.data[0].blk;
-//       careerStats.steals += data.data[0].stl;
-//       careerStats.turnOver += data.data[0].turnover;
-//       console.log("Career stats inside ajax call: ", careerStats);
-//     });
-
-//     counter++;
-//   }
-//   console.log("Counter: ", counter);
-//   (console.log("Career stats outside of ajax call: ", careerStats));
-// }
-
-function consoleLogActuallyRuinedMyEvening(careerStats) {
-  console.log(careerStats);
-}
-
-var ctx = null;
-var chart = null;
-
 function mapStatsToChart(data) {
   const labels = [];
   const seasonStats = {
@@ -163,7 +139,6 @@ function mapStatsToChart(data) {
     steals: data.data[0].stl,
     turnOver: data.data[0].turnover,
   };
-  console.log("Lebrons chosen season stats: ", seasonStats);
 
   var ctx = document.getElementById("seasonAverages").getContext("2d");
 
