@@ -1,83 +1,8 @@
-// $(document).ready(function () {
-//   playerSearch();
-// });
-
-//TODO: add keypress event for clicking on option and getting that players stuff
-// Getting a player to get stats for
-function playerSearch() {
-  $("#playerSearch").keypress(function () {
-    if ($(this).val().length > 4) {
-      console.log("Success!");
-      var q = $("#playerSearch").val();
-      q = q.replace(/ /g, "_");
-      console.log(q);
-      $.ajax("https://www.balldontlie.io/api/v1/players?search=" + q).done(
-        function (data) {
-          console.log(data);
-          var list = document.getElementById("playerSearchOptions");
-          for (i = 0; i < data.data.length; i++) {
-            console.log(data.data[i].first_name);
-            var option = document.createElement("option");
-            option.value =
-              data.data[i].first_name + " " + data.data[i].last_name;
-            list.appendChild(option);
-          }
-          console.log(list);
-        }
-      );
-    }
-  });
-}
-
-function playerSearch2(search) {
-  // Replace spaces with "_"
-  search = search.replace(/ /g, "_");
-  console.log(search);
-  $.ajax("https://www.balldontlie.io/api/v1/players?search=" + search).done(
-    function (data) {
-      if (data.data.length > 1) {
-        var list = document.getElementById("playerSearchOptions2");
-        for (i = 0; i < data.data.length; i++) {
-          var option = document.createElement("option");
-          option.value = data.data[i].first_name + " " + data.data[i].last_name;
-          list.appendChild(option);
-        }
-      } else {
-        console.log(data);
-        getFirstSeason(data)
-      }
-    }
-  );
-}
-
-// Getting the first season a player played in
-function getFirstSeason(data) {
-  var id = data.data[0].id;
-  $.ajax("https://www.balldontlie.io/api/v1/stats?player_ids[]=" + id).done(
-    function (data) {
-      var firstSeason = parseInt(data.data[0].game.season, 10);
-      console.log("The players first season: ", firstSeason);
-      // calcCareerAverage(firstSeason);
-    }
-  );
-}
-
 $(document).ready(function () {
-  var seasonList = document.getElementById("seasonList");
-  seasonList.options[0] = new Option("Select a season...", "0");
-  seasonList.options[1] = new Option("2015-16", "");
-  seasonList.options[2] = new Option("2016-17", "");
-  seasonList.options[3] = new Option("2017-18", "");
-  seasonList.options[4] = new Option("2018-19", "");
-  seasonList.options[5] = new Option("2019-20", "");
-  seasonList.options[6] = new Option("2020-21", "");
-
-  // Some default values for the player search datalist
-
   // Search on click on button
   $("#playerSearchButton").click(function () {
     var search = $("#playerSearch2").val();
-    playerSearch2(search);
+    playerSearch(search);
   });
 
   // Search on enter key press
@@ -97,19 +22,6 @@ $(document).ready(function () {
   // Clear button for player search
   // TODO
 
-  displaySeasonHeader();
-  getLebronJames();
-  playerSearch();
-});
-
-// TODO:
-// Search for a player and append results to the datalist
-// when value is selected, data will be sent to charting functions
-// when value is selected, the datalist should clear all the options and values
-
-// Will display a header on season selection
-function displaySeasonHeader() {
-  // Display Header based on season selection
   $("#seasonList").change(function () {
     var season = $("#seasonList option:selected").text();
     var h1 = document.createElement("h1");
@@ -120,7 +32,61 @@ function displaySeasonHeader() {
       div.append(h1);
     }
   });
+  // displaySeasonHeader();
+  // getLebronJames();
+  // playerSearch();
+});
+
+
+function playerSearch(search) {
+  // Replace spaces with "_"
+  search = search.replace(/ /g, "_");
+  console.log(search);
+  $.ajax("https://www.balldontlie.io/api/v1/players?search=" + search).done(
+    function (data) {
+      if (data.data.length > 1) {
+        var list = document.getElementById("playerSearchOptions2");
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement("option");
+          option.value = data.data[i].first_name + " " + data.data[i].last_name;
+          list.appendChild(option);
+        }
+      } else {
+        console.log(data);
+        getFirstSeason(data);
+      }
+    }
+  );
 }
+
+// Getting the first season a player played in
+// It turns out that a players first season is not always the first season in the players stat page
+// TODO; FIX
+function getFirstSeason(data) {
+  var id = data.data[0].id;
+  $.ajax("https://www.balldontlie.io/api/v1/stats?player_ids[]=" + id).done(
+    function (data) {
+      var firstSeason = parseInt(data.data[0].game.season, 10);
+      console.log("The players first season: ", firstSeason);
+      fillSeasonSelect(firstSeason);
+    }
+  );
+}
+
+function fillSeasonSelect(firstSeason) {
+  var seasonList = document.getElementById("seasonList");
+  seasonList.options[0] = new Option("Select a season...")
+  var count = 0;
+  for (i = firstSeason; i < 2021; i++) {
+    seasonList.options[count + 1] = new Option(i + "-" + (i + 1), i);
+    count++;
+  }
+}
+
+// TODO:
+// Search for a player and append results to the datalist
+// when value is selected, data will be sent to charting functions
+// when value is selected, the datalist should clear all the options and values
 
 // A hardcoded function for testing
 // Will be used for multiple players and charts/tables
