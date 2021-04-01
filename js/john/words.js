@@ -13,7 +13,7 @@ $(document).ready(function () {
                 "url": url,
                 "method": "GET",
                 "headers": {
-                    "x-rapidapi-key": "3802d49eebmsh116ee2705f1741ep15ef6ejsn83b8aefe81f7",
+                    "x-rapidapi-key": "",
                     "x-rapidapi-host": "wordsapiv1.p.rapidapi.com"
                 }
             };
