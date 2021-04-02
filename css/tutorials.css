@@ -1,0 +1,14 @@
+.headTut {
+  text-align: justify;
+  margin: 0 auto;
+  width: 30em;
+}
+
+.textTut {
+  text-align: justify;
+}
+
+.imageTut {
+  align-items: center;
+  align-content: center;
+}

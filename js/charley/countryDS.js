@@ -5,8 +5,7 @@ $(document).ready(function () {
     //Gets the JSON from the URL
     $.getJSON(URL, function (results) {
       
-      //Test - console.log(results);
-     
+
       //Puts the results into a const called allCountries
       const allCountries = results;
 
