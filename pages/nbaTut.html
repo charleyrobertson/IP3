@@ -116,14 +116,33 @@
                 <h1 class="text-center">Why Visualise the NBA?</h1>
                 <p>Basketball, and sports in general, have hundreds of metrics that can be visualised.</p>
                 <h1 class="text-center">The Data Source</h1>
-                <p>Link to the <a href="https://www.balldontlie.io/#players">NBA API</a> used</p>
                 <img src="../images/NBA/ballDontLieAPISource.PNG" alt="" class="img-fluid border border-4">
-                <h1 class="text-center">Setting up the search bar</h1>
-                <h1 class="text-center">Getting player data</h1>
-                <h1 class="text-center">Display with chart</h1>
+                <p>Before we start to visualise data, we will first need a data source. </p>
+                <p>Link to the <a href="https://www.balldontlie.io/#players">NBA API</a> used</p>
 
-            </div>
-            <div class="col">
+                <h1 class="text-center">Setting up the search bar</h1>
+                <pre>
+                    <code class="language-html">
+                        &lt;div class="col">
+                            &lt;label for="playerSearch2" class="form-label">Search Players 2! Redux &lt;/label>
+                                &lt;div class="input-group">
+                                        &lt;input class="form-control" list="playerSearchOptions2" id="playerSearch2"
+                                            name="playerSearch2" placeholder="Type to search..." />
+                                        &lt;button class="btn btn-outline-success" type="button" id="playerSearchButton">
+                                            Search
+                                        &lt;/button>
+                                        &lt;button class="btn btn-outline-warning" type="button" id="playerClearButton">
+                                            Clear
+                                        &lt;/button>
+                                        &lt;datalist id="playerSearchOptions2">
+                                            &lt;option value="Lebron James">&lt;/option>
+                                            &lt;option value="James Harden">&lt;/option>
+                                            &lt;option value="Stephen Curry">&lt;/option>
+                                        &lt;/datalist>
+                                &lt;/div>
+                        &lt;/div>
+                    </code>
+                </pre>
                 <pre>
                     <code class="language-javascript">
                         function playerSearch(search) {
@@ -150,6 +169,127 @@
                         }}
                     </code>
                 </pre>
+                <h1 class="text-center">Getting player data</h1>
+                <h2 class="text-center">1. Getting a players first season</h2>
+                <pre>
+                    <code class="lang-js">
+                        function getFirstSeason(data) {
+                            var id = data.data[0].id;
+                            $.ajax("https://www.balldontlie.io/api/v1/stats?player_ids[]=" + id).done(
+                                function (data) {
+                                    var firstSeason = parseInt(data.data[0].game.season, 10);
+                                    console.log("The players first season: ", firstSeason);
+                                    fillSeasonSelect(firstSeason);
+                                }
+                            );
+                        }
+                    </code>
+                </pre>
+                <h2 class="text-center">2. Adding seasons to the select element</h2>
+                <pre>
+                    <code class="lang-js">
+                        function fillSeasonSelect(firstSeason) {
+                            removeSeasonSelect();
+                            var seasonList = document.getElementById("seasonList");
+                            seasonList.options[0] = new Option("Select a season...");
+                            var count = 0;
+                            for (i = firstSeason; i < 2021; i++) {
+                                seasonList.options[count + 1] = new Option(i + "-" + (i + 1), i);
+                                count++;
+                            }
+                        }
+                    </code>
+                </pre>
+                <h1 class="text-center">Display with chart</h1>
+                <pre>
+                    <code class="lang-js">
+                        function mapStatsToChart(data) {
+                            const labels = [];
+                            const seasonStats = {
+                                points: data.data[0].pts,
+                                assits: data.data[0].ast,
+                                rebounds: data.data[0].reb,
+                                blocks: data.data[0].blk,
+                                steals: data.data[0].stl,
+                                turnOver: data.data[0].turnover,
+                            };
+                        
+                            var ctx = document.getElementById("seasonAverages").getContext("2d");
+                        
+                            // Destroy previous chart
+                            if (chart != null) {
+                                chart.destroy();
+                                chart = null;
+                            }
+                        
+                            chart = new Chart(ctx, {
+                                type: "bar",
+                                data: {
+                                    labels: [
+                                        "Points",
+                                        "Assists",
+                                        "Rebounds",
+                                        "Blocks",
+                                        "Steals",
+                                        "Turn Overs",
+                                    ],
+                                    datasets: [
+                                        {
+                                            label: "Season Averages",
+                                            data: [
+                                                seasonStats.points,
+                                                seasonStats.assits,
+                                                seasonStats.rebounds,
+                                                seasonStats.blocks,
+                                                seasonStats.steals,
+                                                seasonStats.turnOver,
+                                            ],
+                                            backgroundColor: [
+                                                "rgba(255, 99, 132, 0.8)",
+                                                "rgba(54, 162, 235, 0.8)",
+                                                "rgba(255, 206, 86, 0.8)",
+                                                "rgba(75, 192, 192, 0.8)",
+                                                "rgba(153, 102, 255, 0.8)",
+                                                "rgba(255, 159, 64, 0.8)",
+                                            ],
+                                            borderColor: [
+                                                "rgba(255, 99, 132, 1)",
+                                                "rgba(54, 162, 235, 1)",
+                                                "rgba(255, 206, 86, 1)",
+                                                "rgba(75, 192, 192, 1)",
+                                                "rgba(153, 102, 255, 1)",
+                                                "rgba(255, 159, 64, 1)",
+                                            ],
+                                            borderWidth: 4,
+                                        },
+                                    ],
+                                },
+                                options: {
+                                    animation: {
+                                        onProgress: function (animation) {
+                                            ProgressEvent.value =
+                                                animation.animationObject.currentStep /
+                                                animation.animationObject.numSteps;
+                                        },
+                                    },
+                                    scales: {
+                                        yAxes: [
+                                            {
+                                                ticks: {
+                                                    beginAtZero: true,
+                                                },
+                                            },
+                                        ],
+                                    },
+                                },
+                            });
+                        }
+                    </code>
+                </pre>
+
+            </div>
+            <div class="col">
+
             </div>
         </div>
     </main>
@@ -157,7 +297,7 @@
     <!-- Bootstrap bundle with popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="../js/prism.js"></script>
 </body>
 
