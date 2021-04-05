@@ -44,7 +44,7 @@
                             <li><a class="dropdown-item" href="../pages/covidTut.html">Covid-19 Statistics</a></li>
                             <li><a class="dropdown-item" href="../pages/nbaTut.html">NBA Analytics</a></li>
                             <li><a class="dropdown-item" href="../pages/ISSTut.html">Where is the ISS?</a></li>
-                            <li><a class="dropdown-item" href="../pages/weatherTut.html">Global Temperatures</a></li>
+                            <li><a class="dropdown-item" href="../pages/temperatureTut.html">Global Temperatures</a></li>
                             <li><a class="dropdown-item" href="../pages/wordsTut.html">Words & Synonyms</a></li>
                             <li><a class="dropdown-item">Coming Soon...</a>
                                 <disabled>
@@ -66,100 +66,47 @@
 <body>
     <!-- Start of main page -->
     <!-- Heading -->
-    </br>
-    <header>
-        <h1 style="text-align: center" id="titleHead">Global Temperatures Tutorial Page</h1>
-    </header>
+    <main>
+        <div class="container">
+            <header>
+                <div class="row py-4">
+                    <div class="col-4">
+                        <p class="lead">Global Temperatures: A walkthrough on how the page works</p>
+                        <ul> Topics include
+                            <li>API's</li>
+                            <li>JavsScript</li>
+                            <li>Chart.js</li>
+                            <li>CSV</li>
+                        </ul>
+                        <p><strong>Written by </strong>Kit Morris</p>
+                        <button class="btn btn-primary">View in action</button>
+                    </div>
+                </div>
+            </header>
 
-    <!-- Create breaks so that the heading -- content have white space -->
-    </br>
-    </br>
-
-    <div class="container">
-        <div class="row gy-2">
-            <div class="col text-center" id="headTut">
-                This is a paragraph describing what the API does
+            <div class="justify-content-center">
+                <h1 class="text-center">What does the page do?</h1>
+                <p>The Global Temperatures page uses data provided by a CSV file (GlobalTemp.csv) and uses chartjs to display that data onto a line graph.</p>
+                <h1 class="text-center">Why Visualise Global Temperatures?</h1>
+                <p>Providing a visual of rising global temperatures is a good way of understanding that climate change is a real problem.</p>
+                <h1 class="text-center">The Data Source</h1>
+                <p>Link to the <a href="https://data.giss.nasa.gov/gistemp/">Global Temperatures CSV file</a> used</p>
+                <h1 class="text-center">getData() Function</h1>
+                <p>This is a paragraph explaining the getData() function.</p>
+                <img src="../images/kitTutorial/getData.png" alt="" class="img-fluid border border-4">
+                <h1 class="text-center">The CSV Data</h1>
+                <p>This is a snippet of the first 5 years of the GlobalTemp.csv. CSV (Comma Seperated Value) files are plain text files that contain a list of data.</p>
+                <img src="../images/kitTutorial/temperatureCSV.png" alt="" class="img-fluid border border-4">
+                <h1 class="text-center">chartIT() Function</h1>
+                <p>This is a paragraph explaining the chartIt function. Also explain why getData() is here</p>
+                <img src="../images/kitTutorial/chartIt.png" alt="" class="img-fluid border border-4">
+                <h1 class="text-center">Outcome</h1>
+                <p>This graph is the outcome of the above code. It takes the data from the CSV file and displays it on this chart by utilising the 'line' chartjs API.</p>
+                <img src="../images/kitTutorial/temperatureGraph.png" alt="" class="img-fluid border border-4">
             </div>
+            <br>
         </div>
-
-        <div class="row gy-2">
-            <div class="col g-3" id="textTut">
-                This is a paragraph explaining the getData() function.
-            </div>
-            <div class="col g-3" id="imageTut">
-                <img src="../images/kitTutorial/getData.png">
-            </div>
-        </div>
-
-
-        <div class="row gy-2">
-            <div class="col g-3" id="imageTut">
-                <img src="../images/kitTutorial/temperatureCSV.png">
-            </div>
-            <div class="col g-3" id="textTut">
-                Short paragraph explaining the csv file which will be referenced above
-            </div>
-        </div>
-
-        <div class="row gy-2">
-            <div class="col g-3" id="textTut">
-                This is a paragraph explaining the chartIt function. Also explain why getData() is here
-            </div>
-            <div class="col g-3" id="imageTut">
-                <img src="../images/kitTutorial/chartIt.png">
-            </div>
-        </div>
-
-        <div class="row gy-2">
-            <div class="col g-3" id="imageTut">
-                <img src="../images/kitTutorial/temperatureGraph.png">
-            </div>
-            <div class="col g-3" id="textTut">
-                Paragagraph saying that this is a graph.
-            </div>
-        </div>
-
-        <div class="row gy-2">
-            <div class="col g-3" id="textTut">
-                Similarily to the REST Country API. The data has to be pulled from the M-M-Media Covid-19 API also. This
-                will be done using the same getJSON() method that was used
-                previously. However, since there is more than one datafield within each section of this API, it is
-                important to pull out the specific data that needs to be used within
-                the page and the chart. In this instance, the data that is needed is the confirmed cases, recovery
-                cases, deaths and the time the API was last updated.
-                To do this, there needs to be a country to then pull the data for that specific country; the search for
-                the country will be pulled from the drop down menu.
-                Refer to image on how to do this.
-            </div>
-            <div class="col g-3" id="imageTut">
-                <img src="../images/charleyTutorial/Tut5Image.png">
-            </div>
-        </div>
-
-        <div class="row gy-2">
-            <div class="col g-3" id="imageTut">
-                <img src="../images/kitTutorial/tempGraph2.png">
-            </div>
-            <div class="col g-3" id="textTut">
-                Now that we have the data needed to populate the text fields. The data has to be passed through into a
-                method that will use DOM
-                manipulation to populate the text fields. The method will be called using 'displayData(data)' whilst
-                passing through the data. On the image in this section,
-                you can see how the HTML element is manipulated into showing the data that it is required to.
-            </div>
-        </div>
-
-        <div class="row gy-2">
-            <div class="col g-3" id="textTut">
-
-            </div>
-            <div class="col g-3" id="imageTut">
-                <img src="../images/charleyTutorial/Tut7Image.png">
-            </div>
-        </div>
-
-
-    </div>
+    </main>
 
 
     <!--Scripts-->
