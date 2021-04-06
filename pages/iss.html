@@ -174,6 +174,63 @@
 	
 		<div id="issMap"></div>
         </div>
+<<<<<<< HEAD
+=======
+    </nav>
+    <!-- End of Navbar section -->
+    <h1>Where is the ISS?</h1>
+
+    <p>Latitude: <span id="lat"></span><br /></p>
+    <p>Longitude: <span id="lon"></span><br /></p>
+
+    <div id="issMap"></div>
+
+    <script>
+        const mymap = L.map("issMap").setView([0, 0], 1);
+
+        const issIcon = L.icon({
+            iconUrl: "../images/issPhoto/International_Space_Station.png",
+            iconSize: [50, 32],
+            iconAnchor: [25, 15],
+        });
+
+        const marker = L.marker([0, 0], { icon: issIcon }).addTo(mymap);
+
+        const attribution =
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+        const tileUrl =
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+        const tiles = L.tileLayer(tileUrl, { attribution });
+        tiles.addTo(mymap);
+
+        const api_url = "https://api.wheretheiss.at/v1/satellites/25544";
+
+        async function getIss() {
+            const reponse = await fetch(api_url);
+            const data = await reponse.json();
+            const { latitude, longitude } = data;
+
+            // L.marker([latitude, longitude]).addTo(mymap);
+            marker.setLatLong([latitude, longitude]);
+
+            document.getElementById("lat").textContent = latitude;
+            document.getElementById("lon").textContent = longitude;
+        }
+
+        getIss();
+    </script>
+    <!-- needed for Bootstrap -->
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <!-- needed for chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+        integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+        crossorigin="anonymous"></script>
+</body>
+>>>>>>> tutorial
 
 	
 		<script src="../js/ewan/iss.js"></script>
