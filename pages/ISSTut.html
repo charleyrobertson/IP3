@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/nba.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <title>IP3 Dream Team - NBA Visualisation Tutorial</title>
+</head>
+
+<body>
+    <!-- Navbar section -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../pages/index.html">IP3 Dream Team</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03"
+                aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample03">
+                <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown"
+                            aria-expanded="false">Visualisations</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                            <li>
+                                <a class="dropdown-item" href="../pages/covid.html">Covid-19 Countries Statistics</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../pages/nba.html">NBA Analytics</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../pages/iss.html">Where is the ISS</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../pages/temperature.html">Global Warming?</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../pages/words.html">Words</a>
+                            </li>
+                            <li><a class="dropdown-item">Coming Soon...</a>
+                                <disabled>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown"
+                            aria-expanded="false">Tutorials</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                            <li>
+                                <a class="dropdown-item" href="../pages/covidTut.html">Covid 19</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../pages/nbaTut.html">NBA Analytics</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../pages/ISSTut.html">Where is the ISS</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../pages/temperatureTut.html">Temperatures</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../pages/wordsTut.html">Words</a>
+                            </li>
+                            <li><a class="dropdown-item">Coming Soon...</a>
+                                <disabled>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">The Team</a>
+                    </li>
+                </ul>
+                <form>
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" />
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- End of Navbar section -->
+
+    <!-- Main -->
+    <main>
+        <div class="container">
+            <header>
+                <h1 style="text-align: center;"><strong>Visualisation Tutorial</strong></h1>
+                <p class="lead">The purpose of this page is to provide a walkthrough for the <a
+                        href="../pages/iss.html">Where Is The ISS data
+                        visualisation</a> page.
+                </p>
+                <p>Topics coverd will include:
+                <ol>
+                    <li>API'S</li>
+                    <li>JavaScript</li>
+                    <li>Third party libraries</li>
+                </ol>
+                </p>
+            </header>
+            <div class="row">
+                <h1><strong>Data Source</strong></h1>
+                <div class="col">
+                    <p>This is a description about the API Where Is The ISS</p>
+                </div>
+                <div class="col">
+                    <img src="" alt="" class="img-fluid">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <h1><strong>Search Bar</strong></h1>
+                <div class="col">
+                    <img src="../images/NBA/searchBarCode.PNG" alt="">
+                </div>
+                <div class="col">
+                    <p>This will be a paragraph about setting up the search bar, filtering search requests and setting
+                        up the event listeners</p>
+                </div>
+            </div>
+            <div class="row">
+                <h1><strong>Gathering Data</strong></h1>
+                <div class="col">
+                    <p>This will be a paragraph about using parameters previously gathered to get data to display in the
+                        charts</p>
+                </div>
+                <div class="col">
+                    <img src="../images/NBA/gatherDataFromJSON.PNG" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <h1><strong>Parsing the data</strong></h1>
+                <div class="col">
+                    <img src="../images/NBA/parsingTheData.PNG" alt="">
+                </div>
+                <div class="col">
+                    <p>This will be a small paragraph about pulling out only the data that we choose to display out of
+                        the returned JSON object. 
+
+                        
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <h1><strong>Displaying the Data</strong></h1>
+                <div class="col-6">
+                    <p>This paragraph will be about passing data to the charting functions. Un-decided if much detail
+                        should be given to chart.js, or if I will leave a link to the chart.js docs</p>
+                </div>
+                <div class="col-6">
+                    <img src="../images/NBA/displayingTheData.PNG" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap bundle with popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
