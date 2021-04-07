@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/bootstrap.css" />
     <link rel="stylesheet" href="../css/tutorials.css" />
+    <link rel="stylesheet" href="../css/prism.css">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
         <div class="container-fluid">
             <a class="navbar-brand" href="../pages/index.html">IP3 Dream Team</a>
@@ -86,20 +87,79 @@
 
             <div class="justify-content-center">
                 <h1 class="text-center">What does the page do?</h1>
-                <p>The Global Temperatures page uses data provided by a CSV file (GlobalTemp.csv) and uses chartjs to display that data onto a line graph.</p>
+                <p>The Global Temperatures page uses data provided by a CSV file (GlobalTemp.csv) 
+                    and uses chartjs to display that data onto a line graph.</p>
                 <h1 class="text-center">Why Visualise Global Temperatures?</h1>
                 <p>Providing a visual of rising global temperatures is a good way of understanding that climate change is a real problem.</p>
                 <h1 class="text-center">The Data Source</h1>
                 <p>Link to the <a href="https://data.giss.nasa.gov/gistemp/">Global Temperatures CSV file</a> used</p>
                 <h1 class="text-center">getData() Function</h1>
                 <p>This is a paragraph explaining the getData() function.</p>
-                <img src="../images/kitTutorial/getData.png" alt="" class="img-fluid border border-4">
+                <pre>
+                <code class="language-javascript">
+                    async function getData() {
+                        const response = await fetch("../js/kit/GlobalTemp.csv");
+                        const data = await response.text();
+                      
+                        const table = data.split("\n").slice(1);
+                        table.forEach((elt) => {
+                          const columns = elt.split(",");
+                          const year = columns[0];
+                          xlables.push(year);
+                          const temp = columns[1];
+                          ylabels.push(parseFloat(temp) + 14);
+                          console.log(year, temp);
+                        });
+                      }
+                </code>
+                </pre>
+                
+                
                 <h1 class="text-center">The CSV Data</h1>
-                <p>This is a snippet of the first 5 years of the GlobalTemp.csv. CSV (Comma Seperated Value) files are plain text files that contain a list of data.</p>
-                <img src="../images/kitTutorial/temperatureCSV.png" alt="" class="img-fluid border border-4">
+                <p>This is a snippet of the first 5 years of the GlobalTemp.csv. CSV (Comma Seperated Value) 
+                    files are plain text files that contain a list of data.</p>
+                <pre>
+                    <code class="language-CSV">
+                        1880,-.16,-.27,-.04,-.34,-.13,-.01,-.80,-.43,-.26,-.16,-.10,-.02,.05,.65
+                        1881,-.07,-.16,.01,-.32,.10,-.06,-.91,-.41,-.18,.09,.11,-.04,-.07,.57
+                        1882,-.10,-.20,.00,-.29,-.05,.02,-1.41,-.24,-.12,-.05,-.04,.03,.04,.60
+                        1883,-.16,-.26,-.06,-.31,-.16,.00,-.19,-.53,-.22,-.18,-.15,-.02,.07,.48
+                        1884,-.27,-.41,-.14,-.58,-.15,-.13,-1.30,-.61,-.44,-.13,-.16,-.18,-.02,.63
+                        1885,-.33,-.43,-.24,-.64,-.13,-.27,-1.51,-.66,-.44,-.07,-.20,-.33,-.15,.80
+                    </code>
+                </pre>
                 <h1 class="text-center">chartIT() Function</h1>
                 <p>This is a paragraph explaining the chartIt function. Also explain why getData() is here</p>
-                <img src="../images/kitTutorial/chartIt.png" alt="" class="img-fluid border border-4">
+                <pre>
+                    <code class="language-javascript">
+                        async function chartIt() {
+                            await getData();
+                          
+                          const ctx = document.getElementById("lineChart");
+                          const myChart = new Chart(ctx, {
+                            type: "line",
+                            data: {
+                              labels: xlables,
+                              datasets: [
+                                {
+                                  label: "Global Average Temperatures",
+                                  data: ylabels,
+                                  backgroundColor: [
+                                    "rgba(255, 99, 132, 0.2)",
+                                  ],
+                                  borderColor: [
+                                    "rgba(255, 99, 132, 1)",
+                                  ],
+                                  borderWidth: 1,
+                                  fill: false,
+                                },
+                              ],
+                            },
+                          });
+                          }
+
+                    </code>
+                </pre>
                 <h1 class="text-center">Outcome</h1>
                 <p>This graph is the outcome of the above code. It takes the data from the CSV file and displays it on this chart by utilising the 'line' chartjs API.</p>
                 <img src="../images/kitTutorial/temperatureGraph.png" alt="" class="img-fluid border border-4">
@@ -117,6 +177,8 @@
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Needed for prism.js -->
+    <script src="../js/prism.js"></script>
     <footer>
         <div class="container text-center">
             <div class="footer fixed-bottom">
