@@ -12,15 +12,17 @@ $(document).ready(function () {
 
     //Use getJSON() to pull data from JSON..
     $.getJSON(searchURL, function (results) {
-
+      console.log(results);
+  
       //Put data into its own constant.
       const data = {
         confirmed: results.All.confirmed,
         recovered: results.All.recovered,
         deaths: results.All.deaths,
         updated: results.All.updated,
+        country: results.All.country
       };
-
+      console.log(data.country);
       makeChart(data);
       displayData(data);
     });
