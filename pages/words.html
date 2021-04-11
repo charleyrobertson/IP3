@@ -39,7 +39,6 @@
           </li>
           <li class="nav-item"><a class="nav-link" href="TheTeam.html">The Team</a></li>
         </ul>
-        <form><input class="form-control" type="text" placeholder="Search" aria-label="Search"/></form>
       </div>
     </div>
   </nav>
@@ -55,13 +54,6 @@
       <div style="text-align: center; padding-right: 50px; padding-left: 50px;">
         <h5>This page allows you to search for a word and look at the pretty synonyms!</h5>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce consequat tortor in est vestibulum, a lobortis lorem pulvinar. 
-          Proin elementum placerat magna, et molestie felis varius sit amet. Sed faucibus sagittis auctor. 
-          Sed vestibulum elementum felis, id euismod tellus tempus vitae. 
-          Aliquam nec lectus non purus egestas ultricies eget in sem. 
-          Phasellus id pellentesque dui. 
-        </p>
-        <p>
           <em>
             <a href='wordsTut.html' href="#">Click here to view the tutorial page for this API:</a>
           </em>
@@ -74,6 +66,9 @@
           <input type="submit" value="Submit word!" class="btn btn-secondary" id= 'submitButton'>
         </div>
         <div style="text-align: center; padding-right: 50px; padding-left: 50px;"><p id= "apiReturn"></p></div>
+        <div>
+          <canvas id="wordDefSynChart" width="400" height = "400"></canvas>
+        </div>
         <div style="text-align: center; padding-right: 50px; padding-left: 50px;"><p id= "apiDef"></p></div>
       </div>
     </div>
@@ -81,14 +76,17 @@
 </body>
 
 <footer>
-  <div class="container text-center">
+  <div class="container text-center py-3">
     <div class="footer fixed-bottom">
       <p>© 2021 IP3 Dream Team</p>
     </div>
   </div>
 </footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
+<!-- needed for chart.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- needed for words api -->
 <script type="text/javascript" src="../js/john/words.js"></script> 
 <!-- needed for Bootstrap -->
 <!-- JavaScript Bundle with Popper -->
