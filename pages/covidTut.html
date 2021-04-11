@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/bootstrap.css" />
-    <link rel="stylesheet" href="../css/tutorials.css" />
+    <link rel="stylesheet" href="../css/prism.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    
     <nav
     class="navbar navbar-expand-sm navbar-dark bg-dark"
     aria-label="Third navbar example"
@@ -48,11 +50,9 @@
               <li><a class="dropdown-item" href="../pages/iss.html">Where is the ISS?</a></li>
               <li><a class="dropdown-item" href="../pages/temperature.html">Global Temperatures</a></li>
               <li><a class="dropdown-item" href="../pages/words.html">Words & Synonyms</a></li>
-              <li><a class="dropdown-item">Coming Soon...</a>
-                <disabled>
-              </li>
+              <li><a class="dropdown-item">Coming Soon...</a><disabled></li>
             </ul>
-          
+          </li>
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -60,16 +60,15 @@
               id="dropdown03"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              >Tutorials</a>
+              >Tutorials</a
+            >
             <ul class="dropdown-menu" aria-labelledby="dropdown03">
               <li><a class="dropdown-item" href="../pages/covidTut.html">Covid-19 Statistics</a></li>
               <li><a class="dropdown-item" href="../pages/nbaTut.html">NBA Analytics</a></li>
               <li><a class="dropdown-item" href="../pages/ISSTut.html">Where is the ISS?</a></li>
               <li><a class="dropdown-item" href="../pages/weatherTut.html">Global Temperatures</a></li>
               <li><a class="dropdown-item" href="../pages/wordsTut.html">Words & Synonyms</a></li>
-              <li><a class="dropdown-item">Coming Soon...</a>
-                <disabled>
-              </li>
+              <li><a class="dropdown-item">Coming Soon...</a><disabled></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -96,103 +95,56 @@
     <header><h1 style="text-align: center" id="titleHead">Covid-19 Statistics Tutorial</h1></header>
 
     <!-- Create breaks so that the heading -- content have white space -->
-    </br>
-    </br>
+   
+    <div class="justify-content-center">
+      <h1 class="text-center">Why Visualise Covid-19?</h1>
+      <p>Covid-19 is something that has distrupted the normality of life over the past year. As it has spread
+        globally causing a pandemic where millions of people have died, there is a lot of data regarding virus.
+        The data that I will be visalising is regarding to the confirmed cases, recovery cases and the deaths
+        for each country.
+      </p>
 
-    <div class="container">
-      <div class="row gy-2"> 
-        <div class="col text-center" id="headTut">
-          On this page, there will be a tutorial on how to utilise the Covid-19 M-M-Media API. This API provides many different
-          details about Covid-19. This tutorial will focus specifically on the amount of cases, recovery cases and deaths per country
-          that the API provides statistics for. It will contain how to code the API and how to use it the way that I have decided to implement it.
-        </div>
-      </div>
+      <h1 class="text-center">The Data Sources Used</h1>
+      <img src="../images/charleyTutorial/tutSourceImg.png" alt="" class="img-fluid border border-4">
+      <img src="../images/charleyTutorial/tutSourceImg2.png" alt="" class="img-fluid border border-4">
+      <p>For visualising the data for Covid-19. There are two multiple data sources that will be used, they are both created by the M-Media Group.</p>
+      <p>Link to the <a href="https://covid-api.mmediagroup.fr/v1/cases">M-Media Group Covid Data API</a> used</p>
+      <p>Link to the <a href="https://raw.githubusercontent.com/M-Media-Group/country-json/master/src/countries-master.json">M-Media Group Country Data API</a> used</p>
 
-      <div class="row gy-2">
-        <div class="col g-3" id="textTut">
-          JavaScript will be used to pull the data from the API's and a HTML page will be used to display the data that is pulled from the 
-          API. So it was important to create a two JavaScript files and a HTML file within the program. Within the HTML page, you need to call 
-          JavaScript pages so that it will run correctly. I called my JavaScript pages 'covidDS.js' and 'countryDS.js', so this is the page that I had to call.
-          You also have to call the link to AJAX as this will be used to utilise the API's.  
-          Refer to the image on the right hand side to see how this is done. 
-        </div> 
-        <div class="col g-3" id="imageTut">
-          <img src="../images/charleyTutorial/Tut1Image.png" >
-        </div>
-      </div>
+      <h1 class="text-center">Setting up the search bar</h1>
+      <pre>
+          <code class="language-html">
 
-      
-      <div class="row gy-2"> 
-        <div class="col g-3" id="imageTut">
-          <img src="../images/charleyTutorial/Tut2Image.png" >
-        </div>
-        <div class="col g-3" id="textTut">
-          As mentioned in the above section of the tutorial. The AJAX link is used in the HTML document so that we can use it. This allows us to tell
-          the document in the JavaScript file to run automatically as soon as it is called (Line 1). To be able to utilise the Covid-19 API, the REST countries API needs
-          to have the country data pulled out first. To do this, we use an AJAX function called getJSON() and the URL to the API (Lines 5-10). The results from this will be the JSON that is pulled.
-          Refer to the image on the left hand side to see how this is done.
-          </div>
-      </div>
+          </code>
+      </pre>
+      <pre>
+          <code class="language-javascript">
 
-      <div class="row gy-2">
-        <div class="col g-3" id="textTut">
-          After we pull each country out of the JSON, we then pass it through to a method that will use DOM manipulation to display the data into a drop down list in the page.
-          Once this data is filled, the 'covidDS.js' file will run next to filter any results that the M-M-Media API does not have any data for, the explanation on how to do this will be
-          shown in the next section of the tutorial. To display the data in a drop down list, you need to link it to the droplist on the HTML page and edit it with the data that you want 
-          to insert within the JavaScript page. Refer to the image to see how this is done.
-        </div> 
-        <div class="col g-3" id="imageTut">
-          <img src="../images/charleyTutorial/Tut3Image.png" >
-        </div>
-      </div>
+          </code>
+      </pre>
+      <h1 class="text-center">Getting player data</h1>
+      <h2 class="text-center">1. Getting a players first season</h2>
+      <pre>
+          <code class="lang-js">
 
-      <div class="row gy-2"> 
-        <div class="col g-3" id="imageTut">
-          <img src="../images/charleyTutorial/Tut4Image.png" >
-        </div>
-        <div class="col g-3" id="textTut">
-          As mentioned in the above section of the tutorial, this section will describe how to filter the results of the countries to ensure that only countries that the Covid-19
-          API has data stored for are displayed in the drop down list. To do this, there will be a method created within the JavaScript file to loop through each country from the 
-          REST API and if the M-M-Media API does not have any data from the country being searched then it will be removed from the drop down list. This is to ensure that every country
-          that is clicked in within the drop down has data and will not cause any bugs or errors within the page.
-          </div>
-      </div>
-      
-      <div class="row gy-2">
-        <div class="col g-3" id="textTut">
-          Similarily to the REST Country API. The data has to be pulled from the M-M-Media Covid-19 API also. This will be done using the same getJSON() method that was used 
-          previously. However, since there is more than one datafield within each section of this API, it is important to pull out the specific data that needs to be used within 
-          the page and the chart. In this instance, the data that is needed is the confirmed cases, recovery cases, deaths and the time the API was last updated. 
-          To do this, there needs to be a country to then pull the data for that specific country; the search for the country will be pulled from the drop down menu.
-          Refer to image on how to do this.
-        </div> 
-        <div class="col g-3" id="imageTut">
-          <img src="../images/charleyTutorial/Tut5Image.png" >
-        </div>
-      </div>
+          </code>
+      </pre>
+      <h2 class="text-center">2. Adding seasons to the select element</h2>
+      <pre>
+          <code class="lang-js">
 
-      <div class="row gy-2"> 
-        <div class="col g-3" id="imageTut">
-          <img src="../images/charleyTutorial/Tut6Image.png" >
-        </div>
-        <div class="col g-3" id="textTut">
-          Now that we have the data needed to populate the text fields. The data has to be passed through into a method that will use DOM
-          manipulation to populate the text fields. The method will be called using 'displayData(data)' whilst passing through the data. On the image in this section, 
-          you can see how the HTML element is manipulated into showing the data that it is required to.
-          </div>
-      </div>
+          </code>
+      </pre>
+      <h1 class="text-center">Display with chart</h1>
+      <pre>
+          <code class="lang-js">
+            
+          </code>
+      </pre>
 
-      <div class="row gy-2">
-        <div class="col g-3" id="textTut">
-          
-        </div> 
-        <div class="col g-3" id="imageTut">
-          <img src="../images/charleyTutorial/Tut7Image.png" >
-        </div>
-      </div>
+  </div>
 
-
-    </div>
+  
 
   
     <!--Scripts-->
@@ -205,6 +157,7 @@
         crossorigin="anonymous"
     ></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <script src="../js/prism.js"></script>
   <footer>
     <div class="container text-center">
       <div class="footer fixed-bottom">
