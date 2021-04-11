@@ -19,10 +19,9 @@ $(document).ready(function () {
         confirmed: results.All.confirmed,
         recovered: results.All.recovered,
         deaths: results.All.deaths,
-        updated: results.All.updated,
-        country: results.All.country
+        updated: results.All.updated
       };
-      console.log(data.country);
+      
       makeChart(data);
       displayData(data);
     });

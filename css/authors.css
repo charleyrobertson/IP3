@@ -13,4 +13,19 @@
     margin-left: .75rem;
   }
   /* rtl:end:ignore */
-  
+
+  .d-block {
+    display: block!important;
+}
+
+.link-dark {
+  color: #212529;
+}
+
+.text-decoration-none {
+  text-decoration: none!important;
+}
+
+.dropdown-toggle {
+  outline: 0;
+}
