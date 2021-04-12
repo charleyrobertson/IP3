@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/authors.css"/>
+    <link rel="stylesheet" href="../css/prism.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+    <title>Words & Synonyms Tutorial Page</title>
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../pages/index.html">IP3 Dream Team</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03"
+                aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample03">
+                <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown03"
+                            data-bs-toggle="dropdown" aria-expanded="false">Visualisations</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                            <li><a class="dropdown-item" href="../pages/covid.html">Covid-19 Statistics</a></li>
+                            <li><a class="dropdown-item" href="../pages/nba.html">NBA Analytics</a></li>
+                            <li><a class="dropdown-item" href="../pages/iss.html">Where is the ISS</a></li>
+                            <li><a class="dropdown-item" href="../pages/temperature.html">Global Temperatures</a></li>
+                            <li><a class="dropdown-item" href="../pages/words.html">Words & Synonyms</a></li>
+                            <li><a class="dropdown-item">Coming Soon...</a>
+                                <disabled>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown03"
+                            data-bs-toggle="dropdown" aria-expanded="false">Tutorials</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                            <li><a class="dropdown-item" href="../pages/covidTut.html">Covid-19 Statistics</a></li>
+                            <li><a class="dropdown-item" href="../pages/nbaTut.html">NBA Analytics</a></li>
+                            <li><a class="dropdown-item" href="../pages/ISSTut.html">Where is the ISS</a></li>
+                            <li><a class="dropdown-item" href="../pages/temperatureTut.html">Global Temperatures</a></li>
+                            <li><a class="dropdown-item" href="../pages/wordsTut.html"><b>Words & Synonyms</b></a></li>
+                            <li><a class="dropdown-item">Coming Soon...</a>
+                                <disabled>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="TheTeam.html">The Team</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</head>
+
+<body>
+    <header>
+        <h1 style="text-align: center; padding-top: 10px;" id="titleHead">Words & Synonyms Tutorial</h1>
+    </header>
+
+    <div class="container authors">
+        <div class="row">
+            <div style="text-align: center; padding-right: 50px; padding-left: 50px;">
+                <h3>Why Words & Synonyms?</h3>
+                <p>While the visualisation of a Words/Synonyms API was not my initial intention, the sheer quantity of words out there allows
+                for a massive range of visualisation. The data made available from the many different types of Words API queries could be manipulated many ways, and the simplest and most 
+                interesting way happened to be a definition/synonym query, which would be visualised in a Polar Area chart.</p>
+                
+                <h3>The API/JS in use:</h3>
+                <p>The <a href="https://www.wordsapi.com/">Words API</a> was chosen as it grants access to a large set of data, one that contains over 150,000 words that each have multiple
+                values/variables associated them that can be heavily manipulated for a wide range of utilisations.<br> The <a href = "https://www.chartjs.org/docs/latest/charts/polar.html">
+                Chart.js Polar Area Chart</a> was used to allow for the visualisation of the dataset given through the words API. Chart.js comes with extremely flexible JavaScript charting
+                that allows for very different types of datasets to be visualised however they need be. A Polar Area Chart suited our specific query the best.</p>
+                
+                <h3>The HTML:</h3>
+                <h5>The Form:</h5>
+                <p>- The search/input field, id: 'significantWord', is where the relevant word for the query is entered.<br>
+                - The submit button, id: 'submitButton', is the button that enters the fields data into the query.<br>
+                - The paragraph tag, id: 'apiReturn', is where the query information is placed. <br>
+                - The canvas, id: 'wordDefSynChart', is where the Chart.js is located.<br>
+                - The paragraph tag, id: 'apiDef', is where the query result is placed.<br>
+                </p>
+                <pre>
+                    <code class="language-html">
+    &lt;div style="text-align: center; padding-right: 50px; padding-left: 50px;">
+        &lt;h5>This page allows you to search for a word and look at the pretty synonyms!&lt;/h5>
+        &lt;p>
+            &lt;em>
+                &lt;a href='wordsTut.html' href="#">Click here to view the tutorial page for this API:&lt;/a>
+            &lt;/em>
+        &lt;/p>
+        &lt;h5>Significant Word:&lt;/h6>
+        &lt;form style="padding-top: 5px;">
+            &lt;input type="text" class="form-control" id="significantWord" name="significantWord"
+                placeholder="Type your word here..." required style="text-align: center;">
+        &lt;/form>
+        &lt;div class="form-group" style="padding-top: 10px; padding-bottom: 10px;">
+            &lt;input type="submit" value="Submit word!" class="btn btn-secondary" id='submitButton'>
+        &lt;/div>
+        &lt;div style="text-align: center; padding-right: 50px; padding-left: 50px;">
+            &lt;p id="apiReturn">&lt;/p>
+        &lt;/div>
+        &lt;div id = "chart">
+            &lt;canvas id="wordDefSynChart" width="800" height="800">&lt;/canvas>
+            &lt;br>
+        &lt;/div>
+        &lt;div style="text-align: center; padding-right: 50px; padding-left: 50px;">
+            &lt;p id="apiDef">&lt;/p>
+        &lt;/div>
+    &lt;/div>
+                    </code>
+                </pre>
+                <h3>The JavaScript:</h3>
+                <h5>Getting the API Data:</h5>
+                <p>- The word entered by the user is displayed in the 'apiReturn' paragraph tag.<br>
+                - The URL dynamically responds with data depending on what the user entered. <br>
+                - A key is required for this to work.<br>
+                - The API response is returned to the program and 4 attributes are deleted from the response.<br>
+                </p>
+                <pre>
+                    <code class="language-javascript">
+    document.getElementById("apiReturn").innerHTML = "For reference, you chose: '" + primaryWord + "'";
+
+    var url = "https://wordsapiv1.p.rapidapi.com/words/" + primaryWord;
+    const settings = {
+        async: true,
+        crossDomain: true,
+        url: url,
+        method: "GET",
+        headers: {
+            "x-rapidapi-key": "?",
+            "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+        },
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+
+        var responseData, i, x = "";
+        responseData = response;
+
+        delete responseData.frequency;
+        delete responseData.pronunciation;
+        delete responseData.syllables;
+        delete responseData.__proto__;
+                    </code>
+                </pre>
+
+
+                <h5>Utilizing the API Data (definitions):</h5>
+                <p>- Gets the amount of results from the query as a number.<br>
+                - Initializes two arrays, one for the definitions, another for the synonyms.<br>
+                - For each query response it finds the exact exact definition and turns it to a string.<br>
+                </p>
+                <pre>
+                    <code class="language-javascript">
+    var responseDataAmount = responseData.results.length;
+    var defArray = new Array();
+    var synLengthArray = new Array();
+
+    for (i = 0; i < responseDataAmount; i++) {
+        const iterationDef = {
+            definition: responseData.results[i].definition,
+        };
+        var definition = iterationDef.definition.toString();
+
+        //Display code covered below.
+        ...
+                    </code>
+                </pre>
+
+                <h5>Utilizing the API Data (synonyms):</h5>
+                <p>- Gets all the synonyms associated with the current definition ([i]) from the results.<br>
+                - Checks if there are synonyms associated, assigning a value of 0 if needed.<br>
+                - Gets the total amount of synonyms associated, turning into a data type before putting it in an array.<br>
+                - Iterates a loop that gets the name of every synonym in the array.<br></p>
+                <pre>
+                    <code class="language-javascript">
+    const iterationSyn = {
+            synonyms: responseData.results[i].synonyms,
+        };
+
+    var synCheck = iterationSyn.synonyms;
+    if (synCheck !== undefined) {
+        var defSynonymLength = responseData.results[i].synonyms.length;
+
+        var synLengthInt = parseInt(defSynonymLength);
+        var synLengthArray = synLengthArray.concat(synLengthInt);
+
+        for (p = 0; p < defSynonymLength; p++) {
+            const specificSyn = {
+                synonyms: responseData.results[i].synonyms[p],
+            };
+
+            //Display code covered below.
+            ...
+        }
+    } else {
+        var synLengthArray = synLengthArray.concat(0);
+    }
+                    </code>
+                </pre>
+
+                <h5>Displaying the Data (Dynamic HTML):</h5>
+                <p>- Takes the exact definition/synonym and puts it in a variable.<br>
+                - Dynamically creates a div, giving it a class.<br>
+                - Dynamically adds text to the div that includes the definition/synonym variable and its associated iteration.<br>
+                - Adds the child node to the 'apiDef' paragraph tag.<br></p>
+                <pre>
+                    <code class="language-javascript">
+    var defArray = defArray.concat(definition);
+    const div = document.createElement("div");
+    div.className = "row";
+    div.innerHTML = "<h6><b>Definition No." + [i] + ':</b></h6><br><p>"' + definition + '"</p>';
+    document.getElementById("apiDef").appendChild(div);
+
+    ...
+
+    var specSynonym = specificSyn.synonyms.toString();
+    const div = document.createElement("div");
+    div.className = "row";
+    div.innerHTML = "<p>- <i>" + specSynonym + "</i></p>";
+    document.getElementById("apiDef").appendChild(div);
+                    </code>
+                </pre>
+
+                <h5>Displaying the Data (Chart JS):</h5>
+                <p>- Sets all the data in the chart to the 'synLengthArray', which is an array of the amount of synonyms associated with the word.<br>
+                - Sets all the labels in the chart to the 'defArray', which is an array of all the words definitions.<br>
+                - Sets the type of chart to a polar area chart, with the legend & scale included.<br></p>
+                <pre>
+                    <code class="language-javascript">
+    var data = {
+        datasets: [{
+                data: synLengthArray,
+                backgroundColor: [
+                    "#FF0000",
+                    "#FF7F00",
+                    "#FFFF00",
+                    "#00FF00",
+                    "#0000FF",
+                    "#4B0082",
+                    "#9400D3",
+                    "#232323",
+                    "#666565",
+                    "#A7A6A6",
+                    "#DDDDDD"
+                ],
+                label: "Words & Synonyms:",
+            },
+        ],
+        labels: defArray,
+    };
+    var ctx = $("#wordDefSynChart");
+    new Chart(ctx, {
+        data: data,
+        type: "polarArea",
+        options: {
+            legend: {
+                display: true,
+            },
+            scale: {
+                display: true,
+            },
+        },
+    });
+                </code>
+            </pre>
+            </div>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <div class="container text-center py-3">
+        <div class="footer fixed-bottom">
+            <p>© 2021 IP3 Dream Team</p>
+        </div>
+    </div>
+</footer>
+
+<!--Scripts-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../js/prism.js"></script>
+
+</html>>
