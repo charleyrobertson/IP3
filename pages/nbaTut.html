@@ -111,61 +111,63 @@
                 <p>The NBA is a professional basketball league in North America composed of 30 teams. It is the premier
                     men's professional basketball league in the world</p>
                 <h1 class="text-center">Why Visualise the NBA?</h1>
-                <p>Basketball, and sports in general, have hundreds of metrics that can be visualised.</p>
+                <p>Basketball, and sports in general, have hundreds of metrics that can be visualised. </p>
                 <h1 class="text-center">The Data Source</h1>
                 <img src="../images/NBA/ballDontLieAPISource.PNG" alt="" class="img-fluid border border-4">
-                <p>Before we start to visualise data, we will first need a data source. </p>
-                <p>Link to the <a href="https://www.balldontlie.io/#players">NBA API</a> used</p>
+                <p>Before we start to visualise data, we will first need a data source. For sport data, this would usually be API which we will then utilise. </p>
+                <p>There are a few API's from which we can choose from, but for our uses, the <a href="https://balldontlie.io#players">BallDontLie</a> NBA API is perfect as it's endpoints contain average season data for players.</p>
+                <p>We will come back to these endpoints in a little while.</p>
 
-                <h1 class="text-center">Setting up the search bar</h1>
-                <pre>
-                    <code class="language-html">
+                <div class="py-3">
+                    <h1 class="text-center">Setting up the search bar</h1>
+
+                    <pre>
+                        <code class="language-html">
         &lt;div class="col">
             &lt;label for="playerSearch2" class="form-label">Search Players 2! Redux &lt;/label>
                 &lt;div class="input-group">
-                        &lt;input class="form-control" list="playerSearchOptions2" id="playerSearch2"
-                            name="playerSearch2" placeholder="Type to search..." />
-                        &lt;button class="btn btn-outline-success" type="button" id="playerSearchButton">
-                            Search
-                        &lt;/button>
-                        &lt;button class="btn btn-outline-warning" type="button" id="playerClearButton">
-                            Clear
-                        &lt;/button>
-                        &lt;datalist id="playerSearchOptions2">
-                            &lt;option value="Lebron James">&lt;/option>
-                            &lt;option value="James Harden">&lt;/option>
-                            &lt;option value="Stephen Curry">&lt;/option>
-                        &lt;/datalist>
+                    &lt;input class="form-control" list="playerSearchOptions2" id="playerSearch2"
+                        name="playerSearch2" placeholder="Type to search..." />
+                    &lt;button class="btn btn-outline-success" type="button" id="playerSearchButton">
+                        Search
+                    &lt;/button>
+                    &lt;datalist id="playerSearchOptions2">
+                        &lt;option value="Lebron James">&lt;/option>
+                        &lt;option value="James Harden">&lt;/option>
+                        &lt;option value="Stephen Curry">&lt;/option>
+                    &lt;/datalist>
                 &lt;/div>
         &lt;/div>
-                    </code>
-                </pre>
-                <pre>
-                    <code class="language-javascript">
-                        function playerSearch(search) {
-                            // Replace spaces with "_"
-                            search = search.replace(/ /g, "_");
-                            console.log(search);
-                            $.ajax("https://www.balldontlie.io/api/v1/players?search=" + search).done(
-                                function (data) {
-                                    if (data.data.length > 1) {
-                                        var list = document.getElementById("playerSearchOptions2");
-                                        for (i = 0; i < data.data.length; i++) {
-                                            var option = document.createElement("option");
-                                            option.value =
-                                                data.data[i].first_name + " " + data.data[i].last_name;
-                                            list.appendChild(option);
-                                        }
-                                    } else {
-                                        currentPlayer = data;
-                                        console.log("currentPlayer:", currentPlayer);
-                                        getFirstSeason(data);
-                                    }
-                                }
-                            );
-                        }}
-                    </code>
-                </pre>
+                        </code>
+                    </pre>
+                    <pre>
+                        <code class="language-javascript">
+        function playerSearch(search) {
+            // Replace spaces with "_"
+            search = search.replace(/ /g, "_");
+            console.log(search);
+            $.ajax("https://www.balldontlie.io/api/v1/players?search=" + search).done(
+                function (data) {
+                    if (data.data.length > 1) {
+                        var list = document.getElementById("playerSearchOptions2");
+                        for (i = 0; i < data.data.length; i++) {
+                            var option = document.createElement("option");
+                            option.value =
+                                data.data[i].first_name + " " + data.data[i].last_name;
+                            list.appendChild(option);
+                        }
+                    } else {
+                        currentPlayer = data;
+                        console.log("currentPlayer:", currentPlayer);
+                        getFirstSeason(data);
+                    }
+                }
+            );
+        }}
+                        </code>
+                    </pre>
+                </div>
+
                 <h1 class="text-center">Getting player data</h1>
                 <h2 class="text-center">1. Getting a players first season</h2>
                 <pre>
