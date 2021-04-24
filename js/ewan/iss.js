@@ -1,4 +1,4 @@
-          // Making a map and tiles
+           // Making a map and tiles
 		  const mymap = L.map('issMap').setView([0, 0], 1);
 		  const attribution =
 			'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
