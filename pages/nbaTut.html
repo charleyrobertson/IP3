@@ -114,24 +114,30 @@
                 <p>Basketball, and sports in general, have hundreds of metrics that can be visualised. </p>
                 <h1 class="text-center">The Data Source</h1>
                 <img src="../images/NBA/ballDontLieAPISource.PNG" alt="" class="img-fluid border border-4">
-                <p>Before we start to visualise data, we will first need a data source. For sport data, this would usually be API which we will then utilise. </p>
-                <p>There are a few API's from which we can choose from, but for our uses, the <a href="https://balldontlie.io#players">BallDontLie</a> NBA API is perfect as it's endpoints contain average season data for players.</p>
+                <p>Before we start to visualise data, we will first need a data source. For sport data, this would
+                    usually be API which we will then utilise. </p>
+                <p>There are a few API's from which we can choose from, but for our uses, the <a
+                        href="https://balldontlie.io#players">BallDontLie</a> NBA API is perfect as it's endpoints
+                    contain average season data for players.</p>
                 <p>We will come back to these endpoints in a little while.</p>
 
                 <div class="py-3">
                     <h1 class="text-center">Setting up the search bar</h1>
-
+                    <p>Here we can see the HTML layout for an input with a label. Notice that we also have a
+                        <code>datalist</code> element attached to the input. We can use this <code>datalist</code>
+                        element to use pre-determined values which appear when the search bar is focused.
+                    </p>
                     <pre>
                         <code class="language-html">
         &lt;div class="col">
-            &lt;label for="playerSearch2" class="form-label">Search Players 2! Redux &lt;/label>
+            &lt;label for="playerSearch" class="form-label">Search for players &lt;/label>
                 &lt;div class="input-group">
-                    &lt;input class="form-control" list="playerSearchOptions2" id="playerSearch2"
-                        name="playerSearch2" placeholder="Type to search..." />
+                    &lt;input class="form-control" list="playerSearchOptions" id="playerSearch"
+                        name="playerSearch" placeholder="Type to search..." />
                     &lt;button class="btn btn-outline-success" type="button" id="playerSearchButton">
                         Search
                     &lt;/button>
-                    &lt;datalist id="playerSearchOptions2">
+                    &lt;datalist id="playerSearchOptions">
                         &lt;option value="Lebron James">&lt;/option>
                         &lt;option value="James Harden">&lt;/option>
                         &lt;option value="Stephen Curry">&lt;/option>
@@ -140,16 +146,48 @@
         &lt;/div>
                         </code>
                     </pre>
+                    <p>Inside of our Javascript file, we have two event listeners which will trigger on user input. The
+                        first of these activates when a user clicks the Search button. The second is listening for the
+                        user to press 'Enter' or 'Return', and if it detects this will run the first event listener.
+                        Both of these event listeners will send the value of the
+                        search input to another function.</p>
+                    <pre>
+                        <code class="language-javascript">
+                // Search on button click
+                $("#playerSearchButton").click(function () {
+                    var search = $("#playerSearch").val();
+                    playerSearch(search);
+                });
+                // Search on enter
+                $("#playerSearch").on("change", function () {
+                    var value = this.value;
+                    $("#playerSearchButton").click();
+                });
+                        </code>
+                    </pre>
+                    <p>This is where we will make our first call to the API, before we do that however we must first
+                        remove and replace whitespace within the search value.
+                    </p>
+                    <p>
+                        Now we make our API call using <code>$.ajax()</code> function using our search value as a
+                        paramater in the URL.
+                    </p>
+                    <p>
+                        If the data returned has a value of more than one, then we will go through the data with a loop,
+                        and attach first names and last names to the datalist we set up earlier.
+                    </p>
+                    <p>
+                        If we get a value of one, then we move onto getting the players first played season in the NBA.
+                    </p>
                     <pre>
                         <code class="language-javascript">
         function playerSearch(search) {
             // Replace spaces with "_"
             search = search.replace(/ /g, "_");
-            console.log(search);
             $.ajax("https://www.balldontlie.io/api/v1/players?search=" + search).done(
                 function (data) {
                     if (data.data.length > 1) {
-                        var list = document.getElementById("playerSearchOptions2");
+                        var list = document.getElementById("playerSearchOptions");
                         for (i = 0; i < data.data.length; i++) {
                             var option = document.createElement("option");
                             option.value =
@@ -168,23 +206,31 @@
                     </pre>
                 </div>
 
-                <h1 class="text-center">Getting player data</h1>
-                <h2 class="text-center">1. Getting a players first season</h2>
+                <h1 class="text-center pb-3">Getting player data</h1>
+                <h2 class="text-center">Getting a players first season</h2>
+                <p>With a single players data passed from the <code>playerSearch()</code> function, we'll pull out the
+                    ID value and use it as a parameter in another ajax call.
+                </p>
+                <p>
+                    We can use the data returned from this to find a players first played season in the NBA. We then
+                    pass this value to the <code>fillSeasonSelect()</code> function.
+                </p>
                 <pre>
                     <code class="lang-js">
-                        function getFirstSeason(data) {
-                            var id = data.data[0].id;
-                            $.ajax("https://www.balldontlie.io/api/v1/stats?player_ids[]=" + id).done(
-                                function (data) {
-                                    var firstSeason = parseInt(data.data[0].game.season, 10);
-                                    console.log("The players first season: ", firstSeason);
-                                    fillSeasonSelect(firstSeason);
-                                }
-                            );
-                        }
+            function getFirstSeason(data) {
+                var id = data.data[0].id;
+                $.ajax("https://www.balldontlie.io/api/v1/stats?player_ids[]=" + id).done(
+                    function (data) {
+                        var firstSeason = parseInt(data.data[0].game.season, 10);
+                        console.log("The players first season: ", firstSeason);
+                        fillSeasonSelect(firstSeason);
+                    }
+                );
+            }
                     </code>
                 </pre>
-                <h2 class="text-center">2. Adding seasons to the select element</h2>
+                <h2 class="text-center">Adding seasons to the select element</h2>
+                <p></p>
                 <pre>
                     <code class="lang-js">
                         function fillSeasonSelect(firstSeason) {

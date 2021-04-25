@@ -7,22 +7,13 @@ var chart = null; // Used for chart
 $(document).ready(function () {
     // Search on click on button
     $("#playerSearchButton").click(function () {
-        var search = $("#playerSearch2").val();
+        var search = $("#playerSearch").val();
         playerSearch(search);
     });
-
-    // Search on enter key press
-    // $("#playerSearch2").keypress(function (e) {
-    //   if (e.which == 13) {
-    //     // Enter key pressed
-    //     $("#playerSearchButton").click(); // Trigger search button click event
-    //   }
-    // });
-
-    // Search on datalist select and on enter press apparently
-    $("#playerSearch2").on("change", function () {
+    // Search on enter
+    $("#playerSearch").on("change", function () {
         var value = this.value;
-        $("#playerSearchButton").click(); // Trigger search button click event
+        $("#playerSearchButton").click();
     });
 
     // Clear button for player search
@@ -50,7 +41,7 @@ function playerSearch(search) {
     $.ajax("https://www.balldontlie.io/api/v1/players?search=" + search).done(
         function (data) {
             if (data.data.length > 1) {
-                var list = document.getElementById("playerSearchOptions2");
+                var list = document.getElementById("playerSearchOptions");
                 for (i = 0; i < data.data.length; i++) {
                     var option = document.createElement("option");
                     option.value =

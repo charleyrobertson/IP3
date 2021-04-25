@@ -91,7 +91,10 @@
                 <h1 class="text-center">The Data Source</h1>
                 <p>Link to the <a href="https://data.giss.nasa.gov/gistemp/">Global Temperatures CSV file</a> used</p>
                 <h1 class="text-center">getData() Function</h1>
-                <p>This is a paragraph explaining the getData() function.</p>
+                <p>The getData() function fetches the data from the CSV file, it then seperates the data and removes the ','.
+                    The xlables and ylabels are then assigned the x and y axis which are year and temperature. 14 is then added
+                    to the temperatures as they are all originally 14 degrees under.
+                </p>
                 <pre>
                 <code class="language-javascript">
                     async function getData() {
@@ -126,7 +129,11 @@
                     </code>
                 </pre>
                 <h1 class="text-center">chartIT() Function</h1>
-                <p>This is a paragraph explaining the chartIt function. Also explain why getData() is here</p>
+                <p>This function displays the line chart. getElementById searches for "lineChart". The type of the chart is "line".
+                    Value for xlables is then set to the declared to be on the x-axis, then the ylabels to be declared on the y-axis.
+                    The colours are declared in an RGBA format. Fill is set to false which means the line graph wont be filled below the line.
+                    await getData(); is placed at the top which ensures the data is loaded before displaying the chart.
+                </p>
                 <pre>
                     <code class="language-javascript">
                         async function chartIt() {

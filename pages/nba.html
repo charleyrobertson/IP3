@@ -90,17 +90,17 @@
                 <h1>NBA Analytics Visualisation</h1>
                 <div class="col">
                     <div class="col">
-                        <label for="playerSearch2" class="form-label">Search Players 2! Redux</label>
+                        <label for="playerSearch" class="form-label">Search for players</label>
                         <div class="input-group">
-                            <input class="form-control" list="playerSearchOptions2" id="playerSearch2"
-                                name="playerSearch2" placeholder="Type to search..." />
+                            <input class="form-control" list="playerSearchOptions" id="playerSearch"
+                                name="playerSearch" placeholder="Type to search..." />
                             <button class="btn btn-outline-success" type="button" id="playerSearchButton">
                                 Search
                             </button>
                             <button class="btn btn-outline-warning" type="button" id="playerClearButton">
                                 Clear
                             </button>
-                            <datalist id="playerSearchOptions2">
+                            <datalist id="playerSearchOptions">
                                 <option value="Lebron James"></option>
                                 <option value="James Harden"></option>
                                 <option value="Stephen Curry"></option>
@@ -117,19 +117,6 @@
             <div class="row">
                 <div id="seasonHeader" class="text-center"></div>
                 <canvas id="seasonAverages"></canvas>
-            </div>
-
-            <div class="row">
-                <div class="col" id="shootingPercentage">
-                    <h1>Shooting Percentage</h1>
-                    <canvas id="shootingPerdentageChart"></canvas>
-                </div>
-                <div class="col" id="highestPoints">
-                    <h1>Highest Points in a Game</h1>
-                </div>
-                <div class="col" id="mostTurnovers">
-                    <h1>You suck</h1>
-                </div>
             </div>
         </div>
     </main>
