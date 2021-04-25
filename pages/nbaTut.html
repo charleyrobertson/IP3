@@ -177,7 +177,8 @@
                         and attach first names and last names to the datalist we set up earlier.
                     </p>
                     <p>
-                        If we get a value of one, then we move onto getting the players first played season in the NBA.
+                        If we get a value of one, we use a golbal variable <code>currentPlayer</code> to hold the player
+                        data, then we move onto getting the players first played season in the NBA.
                     </p>
                     <pre>
                         <code class="language-javascript">
@@ -230,105 +231,184 @@
                     </code>
                 </pre>
                 <h2 class="text-center">Adding seasons to the select element</h2>
-                <p></p>
+                <p>
+                    Now we get the ID of the 'Select Season' dropdown. We will then use a loop with the value passed
+                    through to this function. The purpose of this loop is to generate options to attach to the 'Season
+                    Select' dropdown which will contain a list of successive seasons.
+                </p>
+
                 <pre>
                     <code class="lang-js">
-                        function fillSeasonSelect(firstSeason) {
-                            removeSeasonSelect();
-                            var seasonList = document.getElementById("seasonList");
-                            seasonList.options[0] = new Option("Select a season...");
-                            var count = 0;
-                            for (i = firstSeason; i < 2021; i++) {
-                                seasonList.options[count + 1] = new Option(i + "-" + (i + 1), i);
-                                count++;
-                            }
-                        }
+            function fillSeasonSelect(firstSeason) {
+                removeSeasonSelect();
+                var seasonList = document.getElementById("seasonList");
+                seasonList.options[0] = new Option("Select a season...");
+                var count = 0;
+                for (i = firstSeason; i < 2021; i++) {
+                    seasonList.options[count + 1] = new Option(i + "-" + (i + 1), i);
+                    count++;
+                }
+            }
+                    </code>
+                </pre>
+                <h2 class="text-center">Geting a players season averages</h2>
+                <p>Our final step before we display a players data in a chart is to get seasonal averages for the
+                    selected player.
+                </p>
+                <p>We have an event listener that detects changes in the 'Season Select' dropdown element that will
+                    dynamically display a header based on the season selected.</p>
+                <p>
+                    We have a conditional checking that a valid season is selected. If it is the case, we then call the
+                    <code>getSeasonAverages()</code> function and pass in the <code>currentPlayer</code> global
+                    variable.
+                </p>
+                <pre>
+                    <code class="lang-js">
+            $("#seasonList").change(function () {
+                var season = $("#seasonList option:selected").text();
+                var h1 = document.createElement("h1");
+                h1.innerHTML = season + " SEASON AVERAGES";
+                var div = document.getElementById("seasonHeader");
+                if (season !== "Select a season...") {
+                    $("#seasonHeader").empty();
+                    div.append(h1);
+                    getSeasonAverages(currentPlayer);
+                }
+                // Get data and call charting function
+            });
+                    </code>
+                </pre>
+                <p>
+                    Here we make a final call to the API. It will get the value of the 'Season Select' dropdown, use a
+                    substring of that value to use as a paramater along with the ID of the <code>currentPlayer</code>
+                    variable.
+                </p>
+                <p>
+                    The player ID and substring of the 'Season Select' are used as parameters in the API URL. The
+                    returned data is the seasonal averages of statistics for the selected player in a selected season.
+                </p>
+                <p>
+                    We can now pass this information to the charting function.
+                </p>
+                <pre>
+                    <code class="lang-js">
+            function getSeasonAverages(currentPlayer) {
+                var season = $("#seasonList option:selected").text();
+                var id = currentPlayer.data[0].id;
+                console.log(season, id);
+                if (season !== "Select a season...") {
+                    season = season.substring(0, 4);
+                    $.ajax(
+                        "https://www.balldontlie.io/api/v1/season_averages?season=" +
+                            season +
+                            "&player_ids[]=" +
+                            id
+                    ).done(function (data) {
+                        console.log("Players season averages: ", data);
+                        mapStatsToChart(data);
+                    });
+                }
+            }
                     </code>
                 </pre>
                 <h1 class="text-center">Display with chart</h1>
+                <p>In this function, we first define the stats that we would like to display.</p>
                 <pre>
                     <code class="lang-js">
-                        function mapStatsToChart(data) {
-                            const labels = [];
-                            const seasonStats = {
-                                points: data.data[0].pts,
-                                assits: data.data[0].ast,
-                                rebounds: data.data[0].reb,
-                                blocks: data.data[0].blk,
-                                steals: data.data[0].stl,
-                                turnOver: data.data[0].turnover,
-                            };
-                        
-                            var ctx = document.getElementById("seasonAverages").getContext("2d");
-                        
-                            // Destroy previous chart
-                            if (chart != null) {
-                                chart.destroy();
-                                chart = null;
-                            }
-                        
-                            chart = new Chart(ctx, {
-                                type: "bar",
-                                data: {
-                                    labels: [
-                                        "Points",
-                                        "Assists",
-                                        "Rebounds",
-                                        "Blocks",
-                                        "Steals",
-                                        "Turn Overs",
-                                    ],
-                                    datasets: [
-                                        {
-                                            label: "Season Averages",
-                                            data: [
-                                                seasonStats.points,
-                                                seasonStats.assits,
-                                                seasonStats.rebounds,
-                                                seasonStats.blocks,
-                                                seasonStats.steals,
-                                                seasonStats.turnOver,
-                                            ],
-                                            backgroundColor: [
-                                                "rgba(255, 99, 132, 0.8)",
-                                                "rgba(54, 162, 235, 0.8)",
-                                                "rgba(255, 206, 86, 0.8)",
-                                                "rgba(75, 192, 192, 0.8)",
-                                                "rgba(153, 102, 255, 0.8)",
-                                                "rgba(255, 159, 64, 0.8)",
-                                            ],
-                                            borderColor: [
-                                                "rgba(255, 99, 132, 1)",
-                                                "rgba(54, 162, 235, 1)",
-                                                "rgba(255, 206, 86, 1)",
-                                                "rgba(75, 192, 192, 1)",
-                                                "rgba(153, 102, 255, 1)",
-                                                "rgba(255, 159, 64, 1)",
-                                            ],
-                                            borderWidth: 4,
-                                        },
-                                    ],
+            function mapStatsToChart(data) {
+                const labels = [];
+                const seasonStats = {
+                    points: data.data[0].pts,
+                    assists: data.data[0].ast,
+                    rebounds: data.data[0].reb,
+                    blocks: data.data[0].blk,
+                    steals: data.data[0].stl,
+                    turnOver: data.data[0].turnover,
+                };
+                    </code>
+                </pre>
+                <p>Then we get the canvas element in our HTML page that our chart will draw on to.</p>
+                <p>At this stage we also destroy any chart that may be on the page already.</p>
+                <pre>
+                    <code class="lang-js">
+            var ctx = document.getElementById("seasonAverages").getContext("2d");
+
+            // Destroy previous chart
+            if (chart != null) {
+                chart.destroy();
+                chart = null;
+            };
+                    </code>
+                </pre>
+                <p>
+                    Last to do is to build our chart with the data we have. Much of these settings can be found on the
+                    official <a href="https://www.chartjs.org/docs/latest/samples/bar/vertical.html">Chart.JS</a>
+                    documentation.
+                </p>
+                <pre>
+                    <code class="lang-js">
+            chart = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: [
+                        "Points",
+                        "Assists",
+                        "Rebounds",
+                        "Blocks",
+                        "Steals",
+                        "Turn Overs",
+                    ],
+                    datasets: [
+                        {
+                            label: "Season Averages",
+                            data: [
+                                seasonStats.points,
+                                seasonStats.assits,
+                                seasonStats.rebounds,
+                                seasonStats.blocks,
+                                seasonStats.steals,
+                                seasonStats.turnOver,
+                            ],
+                            backgroundColor: [
+                                "rgba(255, 99, 132, 0.8)",
+                                "rgba(54, 162, 235, 0.8)",
+                                "rgba(255, 206, 86, 0.8)",
+                                "rgba(75, 192, 192, 0.8)",
+                                "rgba(153, 102, 255, 0.8)",
+                                "rgba(255, 159, 64, 0.8)",
+                            ],
+                            borderColor: [
+                                "rgba(255, 99, 132, 1)",
+                                "rgba(54, 162, 235, 1)",
+                                "rgba(255, 206, 86, 1)",
+                                "rgba(75, 192, 192, 1)",
+                                "rgba(153, 102, 255, 1)",
+                                "rgba(255, 159, 64, 1)",
+                            ],
+                            borderWidth: 4,
+                        },
+                    ],
+                },
+                options: {
+                    animation: {
+                        onProgress: function (animation) {
+                            ProgressEvent.value =
+                                animation.animationObject.currentStep /
+                                animation.animationObject.numSteps;
+                        },
+                    },
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true,
                                 },
-                                options: {
-                                    animation: {
-                                        onProgress: function (animation) {
-                                            ProgressEvent.value =
-                                                animation.animationObject.currentStep /
-                                                animation.animationObject.numSteps;
-                                        },
-                                    },
-                                    scales: {
-                                        yAxes: [
-                                            {
-                                                ticks: {
-                                                    beginAtZero: true,
-                                                },
-                                            },
-                                        ],
-                                    },
-                                },
-                            });
-                        }
+                            },
+                        ],
+                    },
+                },
+            });
+        }
                     </code>
                 </pre>
 
