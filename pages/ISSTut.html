@@ -217,8 +217,8 @@
 
                 <h2 class="text-center">4. Creating Map Object</h2>
                 <p> 
-                    We need to create the map object for it to display now that we have done all the prep on the script side. The variables within the
-                    .setView are for Longitude & Latitude for the position of the map when it first loads and the last one is for the zoom level of the map.
+                    We need to create the map object for it to display now that we have done all the prep on the script side. The L in L.map is available since the Leaflet.Js libary has been loaded.
+                     The variables within the .setView are for Longitude & Latitude for the position of the map when it first loads and the last one is for the zoom level of the map.
 
                 </p>
                 <pre>
@@ -231,7 +231,8 @@
                 <P>
                     At this stage the map area will be visible but it wont show anything that is because the map tile hasn't been specified.
                     A tile for the map is the image in which the map is made up of. So to get the tiles we will be using OpenStreetMap which is an open repository.
-                    The only thing that is required to use Open Street map is that it requires you to include an attribution
+                    The only thing that is required to use Open Street map is that it requires you to include an attribution. Once the attribution is included we use the L. to get the function from the libary to call tileLayer.
+                    TileLayer required the tile url and the attribution. Now we can add the tiles and it will be visible on the map
 
                 </P>
                 <pre>
@@ -241,6 +242,30 @@
 		                tiles.addTo(mymap);
                     </code>
                 </pre>
+
+                <h2 class="text-center">5. Creating the Custom Marker</h2>
+                <p>
+                    To created a custom marker we need to find an image we want to use i found a basic replica of the ISS and saved it as a png file.
+                    From that I created a Icon Variable which had the local saved location of the image i wanted to use. With the Leaflet.Js libary is set it as 
+                    the icon to then be used in the map.
+                </p>
+                <pre>
+                    <code class="language-js">
+                        const issIcon = L.icon({
+                            iconUrl: '../images/issPhoto/International_Space_Station.png',
+                            iconSize: [50, 32],
+                            iconAnchor: [25, 16]
+                        });
+                    </code>
+                </pre>
+                <P>
+                    We now have to 
+                </P>
+                <pre>
+                    <code class="lang-js">
+                        let marker = L.marker([0, 0], { icon: issIcon }).addTo(mymap);
+                    </code>
+                </pre> 
 
 
             <h1 class="text-center">Using the Where is the ISS Page</h1>
@@ -258,7 +283,7 @@
 
         </div>
 
-
+        
 
 
         </div>
