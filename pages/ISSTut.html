@@ -215,19 +215,30 @@
                     </code>
                 </pre>
 
-                <h2 class="text-center">4.</h2>
+                <h2 class="text-center">4. Creating Map Object</h2>
                 <p> 
-                    
+                    We need to create the map object for it to display now that we have done all the prep on the script side. The variables within the
+                    .setView are for Longitude & Latitude for the position of the map when it first loads and the last one is for the zoom level of the map.
+
                 </p>
                 <pre>
-                    <code class="language-html">
-                        
+                    <code class="language-js">
+                        const mymap = L.map('issMap').setView([0, 0], 1);
+		                const attribution = &copy; &lt;a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
                     </code>
                 </pre>
-            <pre>
+                <P>
+                    At this stage the map area will be visible but it wont show anything that is because the map tile hasn't been specified.
+                    A tile for the map is the image in which the map is made up of. So to get the tiles we will be using OpenStreetMap which is an open repository.
+                    The only thing that is required to use Open Street map is that it requires you to include an attribution
+
+                </P>
+                <pre>
                     <code class="lang-js">
-                        
+                        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+		                const tiles = L.tileLayer(tileUrl, { attribution });
+		                tiles.addTo(mymap);
                     </code>
                 </pre>
 
