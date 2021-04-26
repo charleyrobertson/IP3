@@ -29,7 +29,7 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="../pages/nba.html">NBA Analytics</a>
-                            </li> 
+                            </li>
                             <li><a class="dropdown-item" href="../pages/iss.html">Where is the ISS?</a></li>
                             <li><a class="dropdown-item" href="../pages/temperature.html">Global Temperatures</a></li>
                             <li><a class="dropdown-item" href="../pages/words.html">Words & Synonyms</a></li>
@@ -45,7 +45,8 @@
                             <li><a class="dropdown-item" href="../pages/covidTut.html">Covid-19 Statistics</a></li>
                             <li><a class="dropdown-item" href="../pages/nbaTut.html">NBA Analytics</a></li>
                             <li><a class="dropdown-item" href="../pages/ISSTut.html">Where is the ISS?</a></li>
-                            <li><a class="dropdown-item" href="../pages/temperatureTut.html">Global Temperatures</a></li>
+                            <li><a class="dropdown-item" href="../pages/temperatureTut.html">Global Temperatures</a>
+                            </li>
                             <li><a class="dropdown-item" href="../pages/wordsTut.html">Words & Synonyms</a></li>
                             <li><a class="dropdown-item">Coming Soon...</a>
                                 <disabled>
@@ -84,15 +85,18 @@
 
             <div class="justify-content-center">
                 <h1 class="text-center">What does the page do?</h1>
-                <p>The Global Temperatures page uses data provided by a CSV file (GlobalTemp.csv) 
+                <p>The Global Temperatures page uses data provided by a CSV file (GlobalTemp.csv)
                     and uses chartjs to display that data onto a line graph.</p>
                 <h1 class="text-center">Why Visualise Global Temperatures?</h1>
-                <p>Providing a visual of rising global temperatures is a good way of understanding that climate change is a real problem.</p>
+                <p>Providing a visual of rising global temperatures is a good way of understanding that climate change
+                    is a real problem.</p>
                 <h1 class="text-center">The Data Source</h1>
                 <p>Link to the <a href="https://data.giss.nasa.gov/gistemp/">Global Temperatures CSV file</a> used</p>
                 <h1 class="text-center">getData() Function</h1>
-                <p>The getData() function fetches the data from the CSV file, it then seperates the data and removes the ','.
-                    The xlables and ylabels are then assigned the x and y axis which are year and temperature. 14 is then added
+                <p>The getData() function fetches the data from the CSV file, it then seperates the data and removes the
+                    ','.
+                    The xlables and ylabels are then assigned the x and y axis which are year and temperature. 14 is
+                    then added
                     to the temperatures as they are all originally 14 degrees under.
                 </p>
                 <pre>
@@ -113,10 +117,10 @@
                       }
                 </code>
                 </pre>
-                
-                
+
+
                 <h1 class="text-center">The CSV Data</h1>
-                <p>This is a snippet of the first 5 years of the GlobalTemp.csv. CSV (Comma Seperated Value) 
+                <p>This is a snippet of the first 5 years of the GlobalTemp.csv. CSV (Comma Seperated Value)
                     files are plain text files that contain a list of data.</p>
                 <pre>
                     <code class="language-CSV">
@@ -129,9 +133,12 @@
                     </code>
                 </pre>
                 <h1 class="text-center">chartIT() Function</h1>
-                <p>This function displays the line chart. getElementById searches for "lineChart". The type of the chart is "line".
-                    Value for xlables is then set to the declared to be on the x-axis, then the ylabels to be declared on the y-axis.
-                    The colours are declared in an RGBA format. Fill is set to false which means the line graph wont be filled below the line.
+                <p>This function displays the line chart. getElementById searches for "lineChart". The type of the chart
+                    is "line".
+                    Value for xlables is then set to the declared to be on the x-axis, then the ylabels to be declared
+                    on the y-axis.
+                    The colours are declared in an RGBA format. Fill is set to false which means the line graph wont be
+                    filled below the line.
                     await getData(); is placed at the top which ensures the data is loaded before displaying the chart.
                 </p>
                 <pre>
@@ -165,7 +172,8 @@
                     </code>
                 </pre>
                 <h1 class="text-center">Outcome</h1>
-                <p>This graph is the outcome of the above code. It takes the data from the CSV file and displays it on this chart by utilising the 'line' chartjs API.</p>
+                <p>This graph is the outcome of the above code. It takes the data from the CSV file and displays it on
+                    this chart by utilising the 'line' chartjs API.</p>
                 <img src="../images/kitTutorial/temperatureGraph.png" alt="" class="img-fluid border border-4">
             </div>
             <br>

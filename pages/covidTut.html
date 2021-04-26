@@ -46,7 +46,8 @@
                             <li><a class="dropdown-item" href="../pages/covidTut.html">Covid-19 Statistics</a></li>
                             <li><a class="dropdown-item" href="../pages/nbaTut.html">NBA Analytics</a></li>
                             <li><a class="dropdown-item" href="../pages/ISSTut.html">Where is the ISS?</a></li>
-                            <li><a class="dropdown-item" href="../pages/temperatureTut.html">Global Temperatures</a></li>
+                            <li><a class="dropdown-item" href="../pages/temperatureTut.html">Global Temperatures</a>
+                            </li>
                             <li><a class="dropdown-item" href="../pages/wordsTut.html">Words & Synonyms</a></li>
                             <li><a class="dropdown-item">Coming Soon...</a>
                                 <disabled>
@@ -63,80 +64,91 @@
     </nav>
 </head>
 
-   
 
-    <!-- Main -->
-    <main>
-        <div class="container">
-             <!-- Heading -->
-            <header>
-                <h1 style="text-align: center" id="titleHead">Covid-19 Statistics Tutorial</h1>
-            </header>
+
+<!-- Main -->
+<main>
+    <div class="container">
+        <!-- Heading -->
+        <header>
+            <h1 style="text-align: center" id="titleHead">Covid-19 Statistics Tutorial</h1>
+        </header>
 
         </br>
 
-            <div class="justify-content-center">
-                <h1 class="text-center">Why Visualise Covid-19?</h1>
-        <p>Covid-19 is something that has distrupted the normality of life over the past year. As it has spread
-            globally causing a pandemic where millions of people have died, there is a lot of data regarding virus.
-            The data that I will be visalising is regarding to the confirmed cases, recovery cases and the deaths
-            for each country.
-        </p>
+        <div class="justify-content-center">
+            <h1 class="text-center">Why Visualise Covid-19?</h1>
+            <p>Covid-19 is something that has distrupted the normality of life over the past year. As it has spread
+                globally causing a pandemic where millions of people have died, there is a lot of data regarding virus.
+                The data that I will be visalising is regarding to the confirmed cases, recovery cases and the deaths
+                for each country.
+            </p>
 
-        <p> On this page, there will be a tutorial on how to utilise the Covid-19 M-Media API's. These API's provide many different
-          details about the virus. This tutorial will focus specifically on the amount of cases, recovery cases and deaths per country
-          that the API provides statistics for. It will contain how to code the API and how to use it the way that I have decided to implement it.
-        </p>
+            <p> On this page, there will be a tutorial on how to utilise the Covid-19 M-Media API's. These API's provide
+                many different
+                details about the virus. This tutorial will focus specifically on the amount of cases, recovery cases
+                and deaths per country
+                that the API provides statistics for. It will contain how to code the API and how to use it the way that
+                I have decided to implement it.
+            </p>
 
-        <h1 class="text-center">The Data Sources Used</h1>
-        <p>For visualising the data for Covid-19. There are two multiple data sources that will be used, they are both
-            created by the M-Media Group. One of the API's will be used to access the data per country, and the other API
-            will be used to retreieve the countries that the API has data for.</p>
-        <img src="../images/charleyTutorial/tutSourceImg.png" alt="" class="img-fluid border border-4">
-        <p class="text-center">Link to the <a href="https://covid-api.mmediagroup.fr/v1/cases">M-Media Group Covid Data API</a> used</p>
+            <h1 class="text-center">The Data Sources Used</h1>
+            <p>For visualising the data for Covid-19. There are two multiple data sources that will be used, they are
+                both
+                created by the M-Media Group. One of the API's will be used to access the data per country, and the
+                other API
+                will be used to retreieve the countries that the API has data for.</p>
+            <img src="../images/charleyTutorial/tutSourceImg.png" alt="" class="img-fluid border border-4">
+            <p class="text-center">Link to the <a href="https://covid-api.mmediagroup.fr/v1/cases">M-Media Group Covid
+                    Data API</a> used</p>
 
-        <img src="../images/charleyTutorial/tutSourceImg2.png" alt="" class="img-fluid border border-4">
-        <p class="text-center">Link to the <a
-            href="https://raw.githubusercontent.com/M-Media-Group/country-json/master/src/countries-master.json">M-Media
-            Group Country JSON API</a> used</p>
+            <img src="../images/charleyTutorial/tutSourceImg2.png" alt="" class="img-fluid border border-4">
+            <p class="text-center">Link to the <a
+                    href="https://raw.githubusercontent.com/M-Media-Group/country-json/master/src/countries-master.json">M-Media
+                    Group Country JSON API</a> used</p>
 
-  
 
-                <h1 class="text-center">Making JavaScript Files Run</h1>
-                <p> 
-                    To make the files run when the HTML page runs, you need to include the scripts at the bottom of the page. The following
-                    code is how you should do this. This includes the scripts to the AJAX libraries and the scripts to both of the JS pages used
-                    to pull the data.
-                </p>
-                <pre>
+
+            <h1 class="text-center">Making JavaScript Files Run</h1>
+            <p>
+                To make the files run when the HTML page runs, you need to include the scripts at the bottom of the
+                page. The following
+                code is how you should do this. This includes the scripts to the AJAX libraries and the scripts to both
+                of the JS pages used
+                to pull the data.
+            </p>
+            <pre>
                     <code class="language-html">
                         &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
                         &lt;script type="text/javascript" src="../js/charley/countriesDS.js"></script>
                         &lt;script type="text/javascript" src="../js/charley/covidDS.js"></script>
                     </code>
                 </pre>
-                <h1 class="text-center">Getting Country Data</h1>
-                <h2 class="text-center">1. Making the JS document run automatically</h2>
-                <p> 
-                    JavaScript pages will not automatically run. So there is an AJAX function which ensures that the pages run when
-                    they are called. 
-                </p>
-                <pre>
+            <h1 class="text-center">Getting Country Data</h1>
+            <h2 class="text-center">1. Making the JS document run automatically</h2>
+            <p>
+                JavaScript pages will not automatically run. So there is an AJAX function which ensures that the pages
+                run when
+                they are called.
+            </p>
+            <pre>
                     <code class="lang-js">
                         $(document).ready(function () {
                             //In here will be the code that needs to run...
                         }
                     </code>
                 </pre>
-                <h2 class="text-center">2. Calling getJSON() Method</h2>
-                <p> 
-                    After the document has been told to run when it is called. The next step is to declare the URL to the 
-                    JSON that we are pulling the data from. After this, we will use the URL that we just declared as a variable
-                    using the .getJSON() method. Using a console.log will allow us to check that the data is being pulled correctly.
-                    This will allow us to store all of the results from the JSON into a variable called results using the 
-                    following method. 
-                </p>
-                <pre>
+            <h2 class="text-center">2. Calling getJSON() Method</h2>
+            <p>
+                After the document has been told to run when it is called. The next step is to declare the URL to the
+                JSON that we are pulling the data from. After this, we will use the URL that we just declared as a
+                variable
+                using the .getJSON() method. Using a console.log will allow us to check that the data is being pulled
+                correctly.
+                This will allow us to store all of the results from the JSON into a variable called results using the
+                following method.
+            </p>
+            <pre>
                     <code class="lang-js">
             var URL = "https://raw.githubusercontent.com/M-Media-Group/country-json/master/src/countries-master.json";
   
@@ -148,14 +160,17 @@
                         });
                     </code>
                 </pre>
-                <h2 class="text-center">3. Splitting Data into Countries</h2>
-                <p> 
-                    Within the .getJSON() method, you need to loop through each results and pull out each country into its own temporary
-                    variable. Within the for loop, we will then call a method called displayCountries() which we will pass through the temporary
-                    variable with the country name within it. The console.log is only there for testing purposes. The displayCountries method will 
-                    be explained in the following seciton of the tutorial.
-                </p>
-                <pre>
+            <h2 class="text-center">3. Splitting Data into Countries</h2>
+            <p>
+                Within the .getJSON() method, you need to loop through each results and pull out each country into its
+                own temporary
+                variable. Within the for loop, we will then call a method called displayCountries() which we will pass
+                through the temporary
+                variable with the country name within it. The console.log is only there for testing purposes. The
+                displayCountries method will
+                be explained in the following seciton of the tutorial.
+            </p>
+            <pre>
                     <code class="lang-js">
                         $.getJSON(URL, function (results) {
         
@@ -172,15 +187,17 @@
                          });
                     </code>
                 </pre>
-                <h2 class="text-center">4. Displaying Countries into Dropdown Menu</h2>
-                <p> 
-                    This function that is called within the getJSON() method, uses DOM manipulation to display each country
-                    within a drop down menu that will allow the user of the website to choose which country they would like 
-                    to see the Covid-19 data for. There is a list defined in the HTML page (see below), we will use the ID of this
-                    list to find it and add each option to it individually with the data that is passed through from the previous
-                    section.
-                </p>
-                <pre>
+            <h2 class="text-center">4. Displaying Countries into Dropdown Menu</h2>
+            <p>
+                This function that is called within the getJSON() method, uses DOM manipulation to display each country
+                within a drop down menu that will allow the user of the website to choose which country they would like
+                to see the Covid-19 data for. There is a list defined in the HTML page (see below), we will use the ID
+                of this
+                list to find it and add each option to it individually with the data that is passed through from the
+                previous
+                section.
+            </p>
+            <pre>
                     <code class="language-html">
                         <!-- Create a drop down for each country -->
                         &lt;select id="countryList">
@@ -190,7 +207,7 @@
 
                     </code>
                 </pre>
-                <pre>
+            <pre>
                     <code class="lang-js">
                         //Function displays each country as an option within a drop down list.
                         function displayCountries(country) {
@@ -200,27 +217,30 @@
                     </code>
                 </pre>
 
-                <h1 class="text-center">Getting Covid-19 Data</h1>
-                <h2 class="text-center">1. Making the JS document run automatically</h2>
-                <p> 
-                    Just like in the Getting Countries Data section of the tutorial,
-                    JavaScript pages will not automatically run. So there is an AJAX function which ensures that the pages run when
-                    they are called. 
-                </p>
-                <pre>
+            <h1 class="text-center">Getting Covid-19 Data</h1>
+            <h2 class="text-center">1. Making the JS document run automatically</h2>
+            <p>
+                Just like in the Getting Countries Data section of the tutorial,
+                JavaScript pages will not automatically run. So there is an AJAX function which ensures that the pages
+                run when
+                they are called.
+            </p>
+            <pre>
                     <code class="lang-js">
                         $(document).ready(function () {
                             //In here will be the code that needs to run...
                         }
                     </code>
                 </pre>
-                <h2 class="text-center">2. Getting Correct URL</h2>
-                <p> 
-                    As this URL searches by country, we will need to get the data that has been selected within the drop down menu,
-                    it is important that each time a new value is selected that the information being searched for changes. To do this,
-                    we need to implement the following code after the document has been readied.
-                </p>
-                <pre>
+            <h2 class="text-center">2. Getting Correct URL</h2>
+            <p>
+                As this URL searches by country, we will need to get the data that has been selected within the drop
+                down menu,
+                it is important that each time a new value is selected that the information being searched for changes.
+                To do this,
+                we need to implement the following code after the document has been readied.
+            </p>
+            <pre>
                     <code class="lang-js">
                         //Each time a new country is selected, reset the data being pulled.
                         $("#countryList").change(function () {
@@ -252,13 +272,14 @@
   
                     </code>
                 </pre>
-                <h2 class="text-center">3. Calling getJSON() Method</h2>
-                <p> 
-                    The way to do this is the same as the way to do it whilst getting the country data. Please refer
-                    to the following code to find out how to pull the data from the search url. The results pulled from this will
-                    be the objects with the data within them for the country that is searched for.
-                </p>
-                <pre>
+            <h2 class="text-center">3. Calling getJSON() Method</h2>
+            <p>
+                The way to do this is the same as the way to do it whilst getting the country data. Please refer
+                to the following code to find out how to pull the data from the search url. The results pulled from this
+                will
+                be the objects with the data within them for the country that is searched for.
+            </p>
+            <pre>
                     <code class="lang-js">
                         //Search URL
                         var searchURL = "searchURLfromAbove";
@@ -272,14 +293,15 @@
                         });
                     </code>
                 </pre>
-                <h2 class="text-center">4. Splitting Data into Variables</h2>
-                <p> 
-                    Within the .getJSON() method, the data will need to be split up into 4 variables. The confirmed cases,
-                    recovery cases, deaths and the time that this data was last updated. Storing this in a const variable 
-                    means that you do not have to pass through each serperate variable when doing the next section of the code. 
-                    The data const will be passed through into two different methods after it has been populated.
-                </p>
-                <pre>
+            <h2 class="text-center">4. Splitting Data into Variables</h2>
+            <p>
+                Within the .getJSON() method, the data will need to be split up into 4 variables. The confirmed cases,
+                recovery cases, deaths and the time that this data was last updated. Storing this in a const variable
+                means that you do not have to pass through each serperate variable when doing the next section of the
+                code.
+                The data const will be passed through into two different methods after it has been populated.
+            </p>
+            <pre>
                     <code class="lang-js">
                         $.getJSON(URL, function (results) {
         
@@ -297,16 +319,21 @@
                          });
                     </code>
                 </pre>
-                <h2 class="text-center">5. Creating Doughnut Chart and Displaying Data</h2>
-                <p> 
-                    This method is called within the getJSON() method and the 'data' constant is passed through. This is populated
-                    using DOM manipulation. ChartJS is being used to create the chart, the ID is used to recognise where in the HTML 
-                    it should be displayed/populated. In the function, I create a new chart and put its "ctx" as the element where it belongs
-                    on the HTML page. Then, the type of chart is defined as a doughnut chart. After that, it is the datasets that are being
-                    implemented into the different sections of the charts and giving them all seperate colours. After the datasets, labels are set 
-                    so that the colours are easily recognised within the chart and the cutout percentage is set to 40%.
-                </p>
-                <pre>
+            <h2 class="text-center">5. Creating Doughnut Chart and Displaying Data</h2>
+            <p>
+                This method is called within the getJSON() method and the 'data' constant is passed through. This is
+                populated
+                using DOM manipulation. ChartJS is being used to create the chart, the ID is used to recognise where in
+                the HTML
+                it should be displayed/populated. In the function, I create a new chart and put its "ctx" as the element
+                where it belongs
+                on the HTML page. Then, the type of chart is defined as a doughnut chart. After that, it is the datasets
+                that are being
+                implemented into the different sections of the charts and giving them all seperate colours. After the
+                datasets, labels are set
+                so that the colours are easily recognised within the chart and the cutout percentage is set to 40%.
+            </p>
+            <pre>
                     <code class="language-html">
                         <!-- CDN Link for ChartJS -->
                         &lt;script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
@@ -317,7 +344,7 @@
                         &lt;/div>
                     </code>
                 </pre>
-                <pre>
+            <pre>
                     <code class="lang-js">
                         function makeChart(stats) {
                             var ctx = document.getElementById("doughnut-chart").getContext("2d");
@@ -351,13 +378,15 @@
                           }
                     </code>
                 </pre>
-                <h2 class="text-center">6. Displaying Data within Labels</h2>
-                <p> 
-                    This is similar to displaying the Country Data in the previous section of the tutorial. This will be displayed
-                    using DOM manipulation and it will display the data that has been pulled from the JSON to the variables that have been defined
-                    with their own ID's in the HTML code, as shown below.
-                </p>
-                <pre>
+            <h2 class="text-center">6. Displaying Data within Labels</h2>
+            <p>
+                This is similar to displaying the Country Data in the previous section of the tutorial. This will be
+                displayed
+                using DOM manipulation and it will display the data that has been pulled from the JSON to the variables
+                that have been defined
+                with their own ID's in the HTML code, as shown below.
+            </p>
+            <pre>
                     <code class="language-html">
                         <!-- Create a small list to show the covid data -->
                         &lt;p id='ConfirmedCases'></p>
@@ -366,7 +395,7 @@
                         &lt;p id='lastUpdated'></p>
                     </code>
                 </pre>
-                <pre>
+            <pre>
                     <code class="lang-js">
                         function displayData(data) {
                             if (data.recovered != 0) {
@@ -389,44 +418,47 @@
                           }
                     </code>
                 </pre>
-                <h1 class="text-center">Using the Covid-19 Statistics Page</h1>
-                <h2 class="text-center">1. Open up the page by clicking on a link</h2>
-                <p> 
-                    Either Navigate to the page using the Nav-Bar or click on <a href="../pages/covid.html">this link</a> to access the Covid-19 Statistics Page. Select an option on the drop down menu 
-                    that is showing on the page to see the data!
-                </p>
-                <h2 class="text-center">2. See the data that is displayed!</h2>
-                <p> 
-                    The page then should automatically update with the graph and fill in the fields on the right hand side of the 
-                    page. It should look similar to the image below and this concludes the section on how to use the Covid-19 Statistics Page.
+            <h1 class="text-center">Using the Covid-19 Statistics Page</h1>
+            <h2 class="text-center">1. Open up the page by clicking on a link</h2>
+            <p>
+                Either Navigate to the page using the Nav-Bar or click on <a href="../pages/covid.html">this link</a> to
+                access the Covid-19 Statistics Page. Select an option on the drop down menu
+                that is showing on the page to see the data!
+            </p>
+            <h2 class="text-center">2. See the data that is displayed!</h2>
+            <p>
+                The page then should automatically update with the graph and fill in the fields on the right hand side
+                of the
+                page. It should look similar to the image below and this concludes the section on how to use the
+                Covid-19 Statistics Page.
                 </br>
-                    <img src="../images/covidPage.jpg" alt="" class="img-fluid border border-4">
-                </p>
-                
-            </div>
-
-
-
+                <img src="../images/covidPage.jpg" alt="" class="img-fluid border border-4">
+            </p>
 
         </div>
-    </main>
 
-    <!--Scripts-->
-    <!--Bootstrap Scripts-->
-    <!-- needed for Bootstrap -->
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-        crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../js/prism.js"></script>
-    <footer>
-        <div class="container text-center py-3">
-            <div class="footer fixed-bottom">
-                <p>© 2021 IP3 Dream Team</p>
-            </div>
+
+
+
+    </div>
+</main>
+
+<!--Scripts-->
+<!--Bootstrap Scripts-->
+<!-- needed for Bootstrap -->
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../js/prism.js"></script>
+<footer>
+    <div class="container text-center py-3">
+        <div class="footer fixed-bottom">
+            <p>© 2021 IP3 Dream Team</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
 
 

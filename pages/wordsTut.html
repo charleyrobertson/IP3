@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="../css/bootstrap.css"/>
-    <link rel="stylesheet" href="../css/authors.css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/authors.css" />
     <link rel="stylesheet" href="../css/prism.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
     <title>Words & Synonyms Tutorial Page</title>
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
@@ -40,7 +40,8 @@
                             <li><a class="dropdown-item" href="../pages/covidTut.html">Covid-19 Statistics</a></li>
                             <li><a class="dropdown-item" href="../pages/nbaTut.html">NBA Analytics</a></li>
                             <li><a class="dropdown-item" href="../pages/ISSTut.html">Where is the ISS</a></li>
-                            <li><a class="dropdown-item" href="../pages/temperatureTut.html">Global Temperatures</a></li>
+                            <li><a class="dropdown-item" href="../pages/temperatureTut.html">Global Temperatures</a>
+                            </li>
                             <li><a class="dropdown-item" href="../pages/wordsTut.html"><b>Words & Synonyms</b></a></li>
                             <li><a class="dropdown-item">Coming Soon...</a>
                                 <disabled>
@@ -63,23 +64,32 @@
         <div class="row">
             <div style="text-align: center; padding-right: 50px; padding-left: 50px;">
                 <h3>Why Words & Synonyms?</h3>
-                <p>While the visualisation of a Words/Synonyms API was not my initial intention, the sheer quantity of words out there allows
-                for a massive range of visualisation. The data made available from the many different types of Words API queries could be manipulated many ways, and the simplest and most 
-                interesting way happened to be a definition/synonym query, which would be visualised in a Polar Area chart.</p>
-                
+                <p>While the visualisation of a Words/Synonyms API was not my initial intention, the sheer quantity of
+                    words out there allows
+                    for a massive range of visualisation. The data made available from the many different types of Words
+                    API queries could be manipulated many ways, and the simplest and most
+                    interesting way happened to be a definition/synonym query, which would be visualised in a Polar Area
+                    chart.</p>
+
                 <h3>The API/JS in use:</h3>
-                <p>The <a href="https://www.wordsapi.com/">Words API</a> was chosen as it grants access to a large set of data, one that contains over 150,000 words that each have multiple
-                values/variables associated them that can be heavily manipulated for a wide range of utilisations.<br> The <a href = "https://www.chartjs.org/docs/latest/charts/polar.html">
-                Chart.js Polar Area Chart</a> was used to allow for the visualisation of the dataset given through the words API. Chart.js comes with extremely flexible JavaScript charting
-                that allows for very different types of datasets to be visualised however they need be. A Polar Area Chart suited our specific query the best.</p>
-                
+                <p>The <a href="https://www.wordsapi.com/">Words API</a> was chosen as it grants access to a large set
+                    of data, one that contains over 150,000 words that each have multiple
+                    values/variables associated them that can be heavily manipulated for a wide range of
+                    utilisations.<br> The <a href="https://www.chartjs.org/docs/latest/charts/polar.html">
+                        Chart.js Polar Area Chart</a> was used to allow for the visualisation of the dataset given
+                    through the words API. Chart.js comes with extremely flexible JavaScript charting
+                    that allows for very different types of datasets to be visualised however they need be. A Polar Area
+                    Chart suited our specific query the best.</p>
+
                 <h3>The HTML:</h3>
                 <h5>The Form:</h5>
-                <p>- The search/input field, id: 'significantWord', is where the relevant word for the query is entered.<br>
-                - The submit button, id: 'submitButton', is the button that enters the fields data into the query.<br>
-                - The paragraph tag, id: 'apiReturn', is where the query information is placed. <br>
-                - The canvas, id: 'wordDefSynChart', is where the Chart.js is located.<br>
-                - The paragraph tag, id: 'apiDef', is where the query result is placed.<br>
+                <p>- The search/input field, id: 'significantWord', is where the relevant word for the query is
+                    entered.<br>
+                    - The submit button, id: 'submitButton', is the button that enters the fields data into the
+                    query.<br>
+                    - The paragraph tag, id: 'apiReturn', is where the query information is placed. <br>
+                    - The canvas, id: 'wordDefSynChart', is where the Chart.js is located.<br>
+                    - The paragraph tag, id: 'apiDef', is where the query result is placed.<br>
                 </p>
                 <pre>
                     <code class="language-html">
@@ -114,9 +124,9 @@
                 <h3>The JavaScript:</h3>
                 <h5>Getting the API Data:</h5>
                 <p>- The word entered by the user is displayed in the 'apiReturn' paragraph tag.<br>
-                - The URL dynamically responds with data depending on what the user entered. <br>
-                - A key is required for this to work.<br>
-                - The API response is returned to the program and 4 attributes are deleted from the response.<br>
+                    - The URL dynamically responds with data depending on what the user entered. <br>
+                    - A key is required for this to work.<br>
+                    - The API response is returned to the program and 4 attributes are deleted from the response.<br>
                 </p>
                 <pre>
                     <code class="language-javascript">
@@ -150,8 +160,8 @@
 
                 <h5>Utilizing the API Data (definitions):</h5>
                 <p>- Gets the amount of results from the query as a number.<br>
-                - Initializes two arrays, one for the definitions, another for the synonyms.<br>
-                - For each query response it finds the exact exact definition and turns it to a string.<br>
+                    - Initializes two arrays, one for the definitions, another for the synonyms.<br>
+                    - For each query response it finds the exact exact definition and turns it to a string.<br>
                 </p>
                 <pre>
                     <code class="language-javascript">
@@ -172,9 +182,10 @@
 
                 <h5>Utilizing the API Data (synonyms):</h5>
                 <p>- Gets all the synonyms associated with the current definition ([i]) from the results.<br>
-                - Checks if there are synonyms associated, assigning a value of 0 if needed.<br>
-                - Gets the total amount of synonyms associated, turning into a data type before putting it in an array.<br>
-                - Iterates a loop that gets the name of every synonym in the array.<br></p>
+                    - Checks if there are synonyms associated, assigning a value of 0 if needed.<br>
+                    - Gets the total amount of synonyms associated, turning into a data type before putting it in an
+                    array.<br>
+                    - Iterates a loop that gets the name of every synonym in the array.<br></p>
                 <pre>
                     <code class="language-javascript">
     const iterationSyn = {
@@ -204,9 +215,10 @@
 
                 <h5>Displaying the Data (Dynamic HTML):</h5>
                 <p>- Takes the exact definition/synonym and puts it in a variable.<br>
-                - Dynamically creates a div, giving it a class.<br>
-                - Dynamically adds text to the div that includes the definition/synonym variable and its associated iteration.<br>
-                - Adds the child node to the 'apiDef' paragraph tag.<br></p>
+                    - Dynamically creates a div, giving it a class.<br>
+                    - Dynamically adds text to the div that includes the definition/synonym variable and its associated
+                    iteration.<br>
+                    - Adds the child node to the 'apiDef' paragraph tag.<br></p>
                 <pre>
                     <code class="language-javascript">
     var defArray = defArray.concat(definition);
@@ -226,9 +238,11 @@
                 </pre>
 
                 <h5>Displaying the Data (Chart JS):</h5>
-                <p>- Sets all the data in the chart to the 'synLengthArray', which is an array of the amount of synonyms associated with the word.<br>
-                - Sets all the labels in the chart to the 'defArray', which is an array of all the words definitions.<br>
-                - Sets the type of chart to a polar area chart, with the legend & scale included.<br></p>
+                <p>- Sets all the data in the chart to the 'synLengthArray', which is an array of the amount of synonyms
+                    associated with the word.<br>
+                    - Sets all the labels in the chart to the 'defArray', which is an array of all the words
+                    definitions.<br>
+                    - Sets the type of chart to a polar area chart, with the legend & scale included.<br></p>
                 <pre>
                     <code class="language-javascript">
     var data = {
