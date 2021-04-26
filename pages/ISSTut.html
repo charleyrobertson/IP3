@@ -147,6 +147,7 @@
 
                     </code>
                 </pre>
+<<<<<<< Updated upstream
             </div>
 
             <h2 class="text-center">2. Calling getJSON() Method</h2>
@@ -160,31 +161,97 @@
                 following method.
             </p>
             <pre>
-                    <code class="lang-js">
-            var URL = "https://raw.githubusercontent.com/M-Media-Group/country-json/master/src/countries-master.json";
-  
-                        //Gets the JSON from the URL
-                        $.getJSON(URL, function (results) {
-        
-                        console.log(results);
+=======
+                    </div>
+                
+                <h2 class="text-center">2. Converting the stream of data into desired response </h2>
+                <p> 
+                    When the data comes back from the fetch function it needs to be converted into the way you want.
+                    We want the response to come back as json. From the Json response we want only the Longitude and Latitude data.
+                    Since the data response is being converted into json it allows to easily get them with the JavaScript Object. 
+                    The being able to JavaScript destructioning it allows to take the data from the object and puts them into their own variables. 
+                    Doing this it makes it easy to display the location data onto the page.
 
-                        });
+                </p>
+                <pre>
+>>>>>>> Stashed changes
+                    <code class="lang-js">
+                        const data = await response.json();
+                        const { latitude, longitude } = data;
+
+                        
+                        document.getElementById('lat').textContent = latitude.toFixed(2);
+			            document.getElementById('lon').textContent = longitude.toFixed(2); 
                     </code>
                 </pre>
+<<<<<<< Updated upstream
             <h2 class="text-center">3. </h2>
             <p>
 
             </p>
             <pre>
+=======
+
+                <p>
+                    Using the .toFixed allows to display the figures to a certain decimal point preventing horrible long numbers being displayed
+                </p>
+
+                <h2 class="text-center">3. Accessing Leaflet.JS  </h2>
+                <p> 
+                    To prepare for using Leaflet.JS some small preparation steps need to be done. You firstly need to include the Leaflet CSS file in the head of the html file. 
+                </p>
+                <pre>
+>>>>>>> Stashed changes
                     <code class="lang-js">
-                        
+                        &lt;link
+			            rel="stylesheet"
+			            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+			            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+			            crossorigin=""
+                        />
                     </code>
                 </pre>
+<<<<<<< Updated upstream
             <h2 class="text-center">4.</h2>
             <p>
 
             </p>
             <pre>
+=======
+                <p>
+                    The next preparation step is to include the Leaflet JavaScript file after the CSS one
+                </p>
+                <pre>
+                    <code class="lang-js">
+                        &lt;script
+                        src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+                        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                        crossorigin=""
+                        /script>
+                    </code>
+                </pre>
+                <p>
+                    The last preparation step that needs to be made is to create a div for where the map will be placed on the page along with this it needs to have a defined hight for it to display.
+                </p>
+
+                <pre>
+                    <code class="lang-html">
+                        &lt;div id="issMap">&lt;/div>
+
+                        &lt;style>
+                            #issMap {
+                                height: 500px;
+                            }
+                        &lt;/style>
+                    </code>
+                </pre>
+
+                <h2 class="text-center">4.</h2>
+                <p> 
+                    
+                </p>
+                <pre>
+>>>>>>> Stashed changes
                     <code class="language-html">
                         
 
