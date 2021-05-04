@@ -259,13 +259,25 @@
                     </code>
                 </pre>
                 <P>
-                    We now have to 
+                    We now have to set the custom marker as the marker on the map.
                 </P>
                 <pre>
                     <code class="lang-js">
                         let marker = L.marker([0, 0], { icon: issIcon }).addTo(mymap);
                     </code>
                 </pre> 
+
+                <h2 class="text-center">6. Auto updating the map</h2>
+                <p>
+                    To get the map to automatically gather the data and display it on its own. We will use the setInterval function. 
+                    This requires you to call the function you want to run on the interval and how often in milliseconds.
+                </p>
+                <pre>
+                    <code class="language-js">
+                        setInterval(getISS, 1000);
+                    </code>
+                </pre>
+                
 
 
             <h1 class="text-center">Using the Where is the ISS Page</h1>
